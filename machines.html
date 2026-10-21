@@ -1,520 +1,210 @@
 
-
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080808">
-  <title>THE MACHINES — VELOCITY</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg: #080808;
-      --panel: #111;
-      --red: #ed1c24;
-      --white: #f5f5f5;
-      --muted: #929292;
-      --line: #292929;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    header {
-      min-height: 78px;
-      padding: 20px 7%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      border-bottom: 1px solid var(--line);
-      background: #080808;
-    }
-
-    .logo {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 30px;
-      font-weight: 900;
-      letter-spacing: 3px;
-    }
-
-    .logo span, footer span { color: var(--red); }
-
-    .back-link {
-      color: var(--muted);
-      font-size: 12px;
-      letter-spacing: 1.5px;
-      transition: color .2s;
-    }
-
-    .back-link:hover { color: var(--red); }
-
-    .hero {
-      min-height: 340px;
-      padding: 90px 7% 70px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background:
-        linear-gradient(90deg, rgba(0,0,0,.95), rgba(0,0,0,.38)),
-        url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=85')
-        center 55% / cover;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .eyebrow {
-      color: var(--red);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 4px;
-      margin-bottom: 18px;
-    }
-
-    h1, h2, h3 {
-      font-family: 'Barlow Condensed', sans-serif;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      font-size: clamp(64px, 10vw, 120px);
-      line-height: .85;
-      font-weight: 900;
-      letter-spacing: -2px;
-    }
-
-    h1 span { color: var(--red); }
-
-    .hero p {
-      max-width: 500px;
-      margin-top: 25px;
-      color: #c1c1c1;
-      line-height: 1.8;
-      font-size: 14px;
-    }
-
-    main { padding: 65px 7% 90px; }
-
-    .section-heading {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 25px;
-      margin-bottom: 30px;
-    }
-
-    h2 {
-      font-size: clamp(38px, 5vw, 58px);
-      line-height: .95;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.7;
-      max-width: 260px;
-    }
-
-    .tools {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-    }
-
-    .tools input, .tools select {
-      background: #111;
-      color: var(--white);
-      border: 1px solid #333;
-      padding: 14px 16px;
-      font: inherit;
-      font-size: 13px;
-      outline: none;
-      min-height: 48px;
-    }
-
-    .tools input {
-      flex: 1;
-      min-width: 200px;
-    }
-
-    .tools input:focus, .tools select:focus {
-      border-color: var(--red);
-    }
-
-    .car-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
-    }
-
-    .car-card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      overflow: hidden;
-      transition: transform .25s, border-color .25s;
-    }
-
-    .car-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--red);
-    }
-
-    .car-image {
-      height: 210px;
-      background: #171717;
-      overflow: hidden;
-    }
-
-    .car-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform .4s;
-    }
-
-    .car-card:hover .car-image img { transform: scale(1.05); }
-
-    .car-info { padding: 22px; }
-
-    .car-brand {
-      color: var(--red);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      margin-bottom: 8px;
-    }
-
-    .car-info h3 {
-      font-size: 32px;
-      margin-bottom: 18px;
-    }
-
-    .specs {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 15px;
-      padding: 17px 0;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .spec-label {
-      display: block;
-      color: var(--muted);
-      font-size: 10px;
-      letter-spacing: 1px;
-      margin-bottom: 6px;
-    }
-
-    .spec-value {
-      font-size: 15px;
-      font-weight: 700;
-    }
-
-    .favorite-btn {
-      width: 100%;
-      margin-top: 18px;
-      padding: 13px;
-      color: var(--white);
-      background: transparent;
-      border: 1px solid #3a3a3a;
-      cursor: pointer;
-      font: inherit;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      transition: .2s;
-    }
-
-    .favorite-btn:hover, .favorite-btn.active {
-      border-color: var(--red);
-      background: var(--red);
-    }
-
-    .empty {
-      display: none;
-      padding: 40px 0;
-      color: var(--muted);
-      text-align: center;
-      grid-column: 1 / -1;
-    }
-
-    .image-note {
-      margin-top: 24px;
-      color: #777;
-      font-size: 11px;
-      line-height: 1.7;
-    }
-
-    footer {
-      padding: 30px 7%;
-      border-top: 1px solid var(--line);
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 15px;
-      color: var(--muted);
-      font-size: 11px;
-      letter-spacing: 1px;
-    }
-
-    @media (max-width: 900px) {
-      .car-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-
-    @media (max-width: 600px) {
-      header { padding: 18px 5%; }
-      .hero, main { padding-left: 5%; padding-right: 5%; }
-      .car-grid { grid-template-columns: 1fr; }
-      .section-heading { align-items: start; flex-direction: column; }
-      .car-image { height: 230px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Machines | VELOCITY</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{--red:#ff2638;--bg:#080808;--panel:#111;--muted:#999}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#fff;font-family:Arial,Helvetica,sans-serif}
+header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;border-bottom:1px solid #252525}
+.logo{font-size:23px;font-weight:900;letter-spacing:3px;color:white;text-decoration:none}
+.logo span{color:var(--red)}
+nav{display:flex;gap:20px;flex-wrap:wrap}
+nav a{color:#aaa;text-decoration:none;font-size:11px;letter-spacing:1.5px}
+nav a:hover,nav a.active{color:var(--red)}
+main{max-width:1200px;margin:auto;padding:55px 7%}
+.eyebrow{color:var(--red);font-size:11px;letter-spacing:4px}
+h1{font-size:clamp(42px,7vw,76px);margin:15px 0}
+h1 span{color:var(--red)}
+.intro{color:#aaa;line-height:1.7;max-width:650px}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:32px 0}
+input,select{padding:13px;background:#151515;color:white;border:1px solid #333;border-radius:5px;min-width:180px;flex:1}
+input:focus,select:focus{outline:1px solid var(--red)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.card{background:var(--panel);border:1px solid #292929;border-radius:9px;overflow:hidden;display:flex;flex-direction:column}
+.car-image{width:100%;height:190px;object-fit:cover;background:#181818;display:block}
+.card-content{padding:18px;display:flex;flex-direction:column;flex:1}
+.tag{color:var(--red);font-size:10px;letter-spacing:2px}
+h2{font-size:20px;line-height:1.35;margin:12px 0}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0 20px}
+.spec{background:#191919;padding:11px;border-radius:5px}
+.spec strong{display:block;font-size:17px}
+.spec small{display:block;color:#888;font-size:10px;margin-top:5px}
+.actions{display:flex;gap:8px;margin-top:auto;flex-wrap:wrap}
+.actions a,.actions button{padding:11px 12px;font-size:10px;font-weight:bold;text-decoration:none;border-radius:4px;cursor:pointer}
+.actions a{background:var(--red);color:white}
+.actions button{background:#191919;color:white;border:1px solid #444}
+.actions button.saved{color:var(--red);border-color:var(--red)}
+.empty{color:#aaa;padding:30px;text-align:center;grid-column:1/-1;border:1px dashed #444}
+footer{text-align:center;color:#666;border-top:1px solid #222;padding:25px;font-size:11px;letter-spacing:2px}
+@media(max-width:600px){header{padding:20px 6%}nav{gap:12px}main{padding:40px 6%}}
+</style>
 </head>
-
 <body>
-  <header>
-    <a href="index.html" class="logo">VELO<span>CITY</span></a>
-    <a href="index.html" class="back-link">← BACK TO HOME</a>
-  </header>
+<header>
+<a class="logo" href="index.html">VELO<span>CITY</span></a>
+<nav>
+<a href="index.html">HOME</a>
+<a class="active" href="machines.html">MACHINES</a>
+<a href="performance.html">PERFORMANCE</a>
+<a href="garage.html">GARAGE</a>
+</nav>
+</header>
 
-  <section class="hero">
-    <div class="eyebrow">THE COLLECTION / 001</div>
-    <h1>THE <span>MACHINES.</span></h1>
-    <p>
-      Engineering without compromise. Discover the machines that push
-      performance, design and speed beyond the limit.
-    </p>
-  </section>
+<main>
+<div class="eyebrow">VELOCITY / AUTOMOTIVE COLLECTION</div>
+<h1>THE <span>MACHINES.</span></h1>
+<p class="intro">De supercarros icónicos aos hypercars extremos. Explora a coleção, compara as máquinas e guarda as tuas favoritas na tua garagem.</p>
 
-  <main>
-    <div class="section-heading">
-      <div>
-        <div class="eyebrow">BUILT DIFFERENT</div>
-        <h2>CHOOSE YOUR<br>WEAPON.</h2>
-      </div>
-      <p>Explore the collection. Search by model or manufacturer and save your favourites.</p>
-    </div>
+<div class="toolbar">
+<input id="search" type="search" placeholder="Search machines..." aria-label="Pesquisar carros">
+<select id="brandFilter" aria-label="Filtrar por marca">
+<option value="all">ALL BRANDS</option>
+<option value="Lamborghini">LAMBORGHINI</option>
+<option value="Bugatti">BUGATTI</option>
+<option value="Nissan">NISSAN</option>
+<option value="McLaren">MCLAREN</option>
+<option value="Porsche">PORSCHE</option>
+<option value="Ferrari">FERRARI</option>
+<option value="Koenigsegg">KOENIGSEGG</option>
+<option value="Mercedes-AMG">MERCEDES-AMG</option>
+</select>
+</div>
 
-    <div class="tools">
-      <input id="searchInput" type="search" placeholder="Search a car or brand..." aria-label="Search cars">
-      <select id="brandFilter" aria-label="Filter by brand">
-        <option value="all">ALL BRANDS</option>
-        <option value="Lamborghini">LAMBORGHINI</option>
-        <option value="Bugatti">BUGATTI</option>
-        <option value="Nissan">NISSAN</option>
-        <option value="McLaren">MCLAREN</option>
-        <option value="Porsche">PORSCHE</option>
-      </select>
-    </div>
+<div class="grid" id="carsGrid"></div>
+</main>
 
-    <div class="car-grid" id="carGrid">
+<footer>VELOCITY © 2026 — BEYOND LIMITS</footer>
 
-      <article class="car-card" data-brand="Lamborghini" data-name="Huracán STO">
-        <div class="car-image">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Huracan_STO.jpg"
-               alt="Lamborghini Huracán STO"
-               loading="lazy"
-               onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=1000&q=85'">
-        </div>
-        <div class="car-info">
-          <div class="car-brand">LAMBORGHINI</div>
-          <h3>Huracán STO</h3>
-          <div class="specs">
-            <div><span class="spec-label">ENGINE</span><span class="spec-value">5.2L V10</span></div>
-            <div><span class="spec-label">POWER</span><span class="spec-value">640 CV</span></div>
-            <div><span class="spec-label">0–100 KM/H</span><span class="spec-value">3.0 s</span></div>
-            <div><span class="spec-label">DRIVE</span><span class="spec-value">RWD</span></div>
-          </div>
-          <button class="favorite-btn" data-id="huracan-sto">＋ ADD TO GARAGE</button>
-        </div>
-      </article>
+<script>
+const STORAGE_KEY="velocity-favorite-cars";
 
-      <article class="car-card" data-brand="Bugatti" data-name="Chiron">
-        <div class="car-image">
-          <img src="https://images.unsplash.com/photo-1600712242805-5f78671b24da?auto=format&fit=crop&w=1000&q=85"
-               alt="Bugatti Chiron"
-               loading="lazy">
-        </div>
-        <div class="car-info">
-          <div class="car-brand">BUGATTI</div>
-          <h3>Chiron</h3>
-          <div class="specs">
-            <div><span class="spec-label">ENGINE</span><span class="spec-value">8.0L W16</span></div>
-            <div><span class="spec-label">POWER</span><span class="spec-value">1500 CV</span></div>
-            <div><span class="spec-label">0–100 KM/H</span><span class="spec-value">2.4 s</span></div>
-            <div><span class="spec-label">DRIVE</span><span class="spec-value">AWD</span></div>
-          </div>
-          <button class="favorite-btn" data-id="bugatti-chiron">＋ ADD TO GARAGE</button>
-        </div>
-      </article>
+const cars=[
+{
+id:"huracan",name:"Lamborghini Huracán STO",brand:"Lamborghini",
+power:"640 cv",speed:"310 km/h",accel:"3.0 s",
+image:"https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Huracan_STO.jpg",
+fallback:"https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=900&q=85"
+},
+{
+id:"chiron",name:"Bugatti Chiron",brand:"Bugatti",
+power:"1.500 cv",speed:"420 km/h",accel:"2.4 s",
+image:"https://images.unsplash.com/photo-1600712242805-5f78671b24da?auto=format&fit=crop&w=900&q=85"
+},
+{
+id:"gtr",name:"Nissan GT-R R35",brand:"Nissan",
+power:"570 cv",speed:"315 km/h",accel:"2.8 s",
+image:"https://commons.wikimedia.org/wiki/Special:FilePath/Nissan_GT-R_R35.jpg",
+fallback:"https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=900&q=85"
+},
+{
+id:"mclaren",name:"McLaren 720S",brand:"McLaren",
+power:"720 cv",speed:"341 km/h",accel:"2.9 s",
+image:"https://commons.wikimedia.org/wiki/Special:FilePath/2019_Mclaren_720S.jpg"
+},
+{
+id:"porsche",name:"Porsche 911 GT3 RS",brand:"Porsche",
+power:"525 cv",speed:"296 km/h",accel:"3.2 s",
+image:"https://commons.wikimedia.org/wiki/Special:FilePath/2024_Porsche_911_GT3_RS_992.jpg"
+},
+{
+id:"ferrari-sf90",name:"Ferrari SF90 Stradale",brand:"Ferrari",
+power:"1.000 cv",speed:"340 km/h",accel:"2.5 s",
+image:"images/Ferrari_SF90.jpg"
+},
+{
+id:"koenigsegg-jesko",name:"Koenigsegg Jesko",brand:"Koenigsegg",
+power:"Até 1.600 cv",speed:"Versão dependente",accel:"Versão dependente",
+image:"images/Koegnigsegg_Jesko.jpg"
+},
+{
+id:"lamborghini-svj",name:"Lamborghini Aventador SVJ",brand:"Lamborghini",
+power:"770 cv",speed:"350 km/h",accel:"2.8 s",
+image:"images/Lamborghini_SVJ.jpg"
+},
+{
+id:"mercedes-amg-one",name:"Mercedes-AMG ONE",brand:"Mercedes-AMG",
+power:"1.063 cv",speed:"352 km/h",accel:"2.9 s",
+image:"images/Mercedes_AMG_One.jpg"
+},
+{
+id:"mclaren-p1",name:"McLaren P1",brand:"McLaren",
+power:"916 cv",speed:"350 km/h",accel:"2.8 s",
+image:"images/Mclaren_P1.jpg"
+}
+];
 
-      <article class="car-card" data-brand="Nissan" data-name="GT-R R35">
-        <div class="car-image">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nissan_GT-R_R35_1.jpg"
-               alt="Nissan GT-R R35"
-               loading="lazy"
-               onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=85'">
-        </div>
-        <div class="car-info">
-          <div class="car-brand">NISSAN</div>
-          <h3>GT-R R35</h3>
-          <div class="specs">
-            <div><span class="spec-label">ENGINE</span><span class="spec-value">3.8L V6</span></div>
-            <div><span class="spec-label">POWER</span><span class="spec-value">570 CV*</span></div>
-            <div><span class="spec-label">0–100 KM/H</span><span class="spec-value">~2.8 s*</span></div>
-            <div><span class="spec-label">DRIVE</span><span class="spec-value">AWD</span></div>
-          </div>
-          <button class="favorite-btn" data-id="nissan-r35">＋ ADD TO GARAGE</button>
-        </div>
-      </article>
+function getFavorites(){
+try{
+const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
+return Array.isArray(saved)?saved:[];
+}catch(error){return [];}
+}
 
-      <article class="car-card" data-brand="McLaren" data-name="720S">
-        <div class="car-image">
-         <img
-  src="https://commons.wikimedia.org/wiki/Special:FilePath/2019_Mclaren_720S.jpg"
-  alt="McLaren 720S"
-  loading="lazy"
->
-        </div>
-        <div class="car-info">
-          <div class="car-brand">MCLAREN</div>
-          <h3>720S</h3>
-          <div class="specs">
-            <div><span class="spec-label">ENGINE</span><span class="spec-value">4.0L V8</span></div>
-            <div><span class="spec-label">POWER</span><span class="spec-value">720 CV</span></div>
-            <div><span class="spec-label">0–100 KM/H</span><span class="spec-value">2.9 s</span></div>
-            <div><span class="spec-label">DRIVE</span><span class="spec-value">RWD</span></div>
-          </div>
-          <button class="favorite-btn" data-id="mclaren-720s">＋ ADD TO GARAGE</button>
-        </div>
-      </article>
+function renderCars(){
+const search=document.getElementById("search").value.toLowerCase().trim();
+const brand=document.getElementById("brandFilter").value;
+const favorites=getFavorites();
 
-      <article class="car-card" data-brand="Porsche" data-name="911 GT3 RS">
-        <div class="car-image">
-          <img
-  src="https://commons.wikimedia.org/wiki/Special:FilePath/2024_Porsche_911_GT3_RS_992.jpg"
-  alt="Porsche 911 GT3 RS"
-  loading="lazy"
->
-        </div>
-        <div class="car-info">
-          <div class="car-brand">PORSCHE</div>
-          <h3>911 GT3 RS</h3>
-          <div class="specs">
-            <div><span class="spec-label">ENGINE</span><span class="spec-value">4.0L Flat-6</span></div>
-            <div><span class="spec-label">POWER</span><span class="spec-value">525 CV</span></div>
-            <div><span class="spec-label">0–100 KM/H</span><span class="spec-value">3.2 s</span></div>
-            <div><span class="spec-label">DRIVE</span><span class="spec-value">RWD</span></div>
-          </div>
-          <button class="favorite-btn" data-id="porsche-gt3rs">＋ ADD TO GARAGE</button>
-        </div>
-      </article>
+const filtered=cars.filter(car=>
+(car.name.toLowerCase().includes(search)||car.brand.toLowerCase().includes(search))&&
+(brand==="all"||car.brand===brand)
+);
 
-      <div class="empty" id="emptyMessage">NO MACHINES FOUND. TRY ANOTHER SEARCH.</div>
-    </div>
+const grid=document.getElementById("carsGrid");
 
-    <p class="image-note">
-      *Performance figures may vary by model year and version.
-      Some photographs are illustrative and may not depict the exact model.
-    </p>
-  </main>
+if(!filtered.length){
+grid.innerHTML='<div class="empty">No machines found. Try another search.</div>';
+return;
+}
 
-  <footer>
-    <a href="index.html">VELO<span>CITY</span></a>
-    <div>ENGINEERED TO GO BEYOND.</div>
-    <div>© 2026 VELOCITY</div>
-  </footer>
+grid.innerHTML=filtered.map(car=>`
+<article class="card">
+<img class="car-image"
+src="${car.image}"
+alt="${car.name}"
+loading="lazy"
+onerror="if(this.dataset.fallbackTried!=='yes'&&this.dataset.fallback){this.dataset.fallbackTried='yes';this.src=this.dataset.fallback}else{this.onerror=null;this.src='https://placehold.co/800x450/111111/ff2638?text=VELOCITY'}"
+${car.fallback?`data-fallback="${car.fallback}"`:""}>
+<div class="card-content">
+<div class="tag">${car.brand.toUpperCase()} / MACHINE</div>
+<h2>${car.name}</h2>
+<div class="specs">
+<div class="spec"><strong>${car.power}</strong><small>POWER</small></div>
+<div class="spec"><strong>${car.speed}</strong><small>TOP SPEED</small></div>
+<div class="spec"><strong>${car.accel}</strong><small>0–100 KM/H</small></div>
+</div>
+<div class="actions">
+<button class="${favorites.includes(car.id)?"saved":""}" data-favorite="${car.id}">
+${favorites.includes(car.id)?"♥ SAVED":"♡ FAVORITE"}
+</button>
+<a href="performance.html">COMPARE ↗</a>
+</div>
+</div>
+</article>
+`).join("");
 
-  <script>
-    const searchInput = document.getElementById("searchInput");
-    const brandFilter = document.getElementById("brandFilter");
-    const cards = [...document.querySelectorAll(".car-card")];
-    const emptyMessage = document.getElementById("emptyMessage");
+grid.querySelectorAll("[data-favorite]").forEach(button=>{
+button.addEventListener("click",()=>{
+const id=button.dataset.favorite;
+const updated=getFavorites();
+const index=updated.indexOf(id);
+if(index>=0)updated.splice(index,1);
+else updated.push(id);
+localStorage.setItem(STORAGE_KEY,JSON.stringify(updated));
+renderCars();
+});
+});
+}
 
-    function filterCars() {
-      const query = searchInput.value.toLowerCase().trim();
-      const brand = brandFilter.value;
-      let visibleCount = 0;
-
-      cards.forEach(card => {
-        const name = card.dataset.name.toLowerCase();
-        const maker = card.dataset.brand.toLowerCase();
-        const matchesText = name.includes(query) || maker.includes(query);
-        const matchesBrand = brand === "all" || card.dataset.brand === brand;
-        const visible = matchesText && matchesBrand;
-
-        card.style.display = visible ? "" : "none";
-        if (visible) visibleCount++;
-      });
-
-      emptyMessage.style.display = visibleCount === 0 ? "block" : "none";
-    }
-
-    searchInput.addEventListener("input", filterCars);
-    brandFilter.addEventListener("change", filterCars);
-
-    const STORAGE_KEY = "velocity-favorite-cars";
-    let favorites = [];
-
-    try {
-      favorites = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-      if (!Array.isArray(favorites)) favorites = [];
-    } catch {
-      favorites = [];
-    }
-
-    function updateFavoriteButtons() {
-      document.querySelectorAll(".favorite-btn").forEach(button => {
-        const saved = favorites.includes(button.dataset.id);
-        button.classList.toggle("active", saved);
-        button.textContent = saved ? "✓ SAVED TO GARAGE" : "＋ ADD TO GARAGE";
-      });
-    }
-
-    document.querySelectorAll(".favorite-btn").forEach(button => {
-      button.addEventListener("click", () => {
-        const id = button.dataset.id;
-
-        if (favorites.includes(id)) {
-          favorites = favorites.filter(item => item !== id);
-        } else {
-          favorites.push(id);
-        }
-
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
-        } catch (error) {
-          console.warn("Browser storage is unavailable.", error);
-        }
-
-        updateFavoriteButtons();
-      });
-    });
-
-    updateFavoriteButtons();
-  </script>
+document.getElementById("search").addEventListener("input",renderCars);
+document.getElementById("brandFilter").addEventListener("change",renderCars);
+window.addEventListener("storage",renderCars);
+renderCars();
+</script>
 </body>
 </html>
