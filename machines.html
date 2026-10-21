@@ -1,11 +1,13 @@
 
+
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>THE MACHINES — VELOCITY</title>
   <meta name="theme-color" content="#080808">
+  <title>THE MACHINES — VELOCITY</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -13,7 +15,7 @@
   <style>
     :root {
       --bg: #080808;
-      --panel: #111111;
+      --panel: #111;
       --red: #ed1c24;
       --white: #f5f5f5;
       --muted: #929292;
@@ -26,9 +28,7 @@
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
@@ -49,7 +49,7 @@
       justify-content: space-between;
       gap: 20px;
       border-bottom: 1px solid var(--line);
-      background: rgba(8, 8, 8, 0.96);
+      background: #080808;
     }
 
     .logo {
@@ -59,20 +59,16 @@
       letter-spacing: 3px;
     }
 
-    .logo span {
-      color: var(--red);
-    }
+    .logo span, footer span { color: var(--red); }
 
     .back-link {
       color: var(--muted);
       font-size: 12px;
       letter-spacing: 1.5px;
-      transition: color 0.2s;
+      transition: color .2s;
     }
 
-    .back-link:hover {
-      color: var(--red);
-    }
+    .back-link:hover { color: var(--red); }
 
     .hero {
       min-height: 340px;
@@ -102,14 +98,12 @@
 
     h1 {
       font-size: clamp(64px, 10vw, 120px);
-      line-height: 0.85;
+      line-height: .85;
       font-weight: 900;
       letter-spacing: -2px;
     }
 
-    h1 span {
-      color: var(--red);
-    }
+    h1 span { color: var(--red); }
 
     .hero p {
       max-width: 500px;
@@ -119,9 +113,7 @@
       font-size: 14px;
     }
 
-    main {
-      padding: 65px 7% 90px;
-    }
+    main { padding: 65px 7% 90px; }
 
     .section-heading {
       display: flex;
@@ -133,7 +125,7 @@
 
     h2 {
       font-size: clamp(38px, 5vw, 58px);
-      line-height: 0.95;
+      line-height: .95;
     }
 
     .section-heading p {
@@ -150,8 +142,7 @@
       flex-wrap: wrap;
     }
 
-    .tools input,
-    .tools select {
+    .tools input, .tools select {
       background: #111;
       color: var(--white);
       border: 1px solid #333;
@@ -167,8 +158,7 @@
       min-width: 200px;
     }
 
-    .tools input:focus,
-    .tools select:focus {
+    .tools input:focus, .tools select:focus {
       border-color: var(--red);
     }
 
@@ -200,16 +190,13 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
       transition: transform .4s;
     }
 
-    .car-card:hover .car-image img {
-      transform: scale(1.05);
-    }
+    .car-card:hover .car-image img { transform: scale(1.05); }
 
-    .car-info {
-      padding: 22px;
-    }
+    .car-info { padding: 22px; }
 
     .car-brand {
       color: var(--red);
@@ -261,8 +248,7 @@
       transition: .2s;
     }
 
-    .favorite-btn:hover,
-    .favorite-btn.active {
+    .favorite-btn:hover, .favorite-btn.active {
       border-color: var(--red);
       background: var(--red);
     }
@@ -273,6 +259,13 @@
       color: var(--muted);
       text-align: center;
       grid-column: 1 / -1;
+    }
+
+    .image-note {
+      margin-top: 24px;
+      color: #777;
+      font-size: 11px;
+      line-height: 1.7;
     }
 
     footer {
@@ -287,39 +280,16 @@
       letter-spacing: 1px;
     }
 
-    footer span {
-      color: var(--red);
-    }
-
     @media (max-width: 900px) {
-      .car-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+      .car-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 600px) {
-      header {
-        padding: 18px 5%;
-      }
-
-      .hero,
-      main {
-        padding-left: 5%;
-        padding-right: 5%;
-      }
-
-      .car-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .section-heading {
-        align-items: start;
-        flex-direction: column;
-      }
-
-      .car-image {
-        height: 230px;
-      }
+      header { padding: 18px 5%; }
+      .hero, main { padding-left: 5%; padding-right: 5%; }
+      .car-grid { grid-template-columns: 1fr; }
+      .section-heading { align-items: start; flex-direction: column; }
+      .car-image { height: 230px; }
     }
   </style>
 </head>
@@ -349,7 +319,7 @@
     </div>
 
     <div class="tools">
-      <input id="searchInput" type="search" placeholder="Search a car or brand...">
+      <input id="searchInput" type="search" placeholder="Search a car or brand..." aria-label="Search cars">
       <select id="brandFilter" aria-label="Filter by brand">
         <option value="all">ALL BRANDS</option>
         <option value="Lamborghini">LAMBORGHINI</option>
@@ -361,9 +331,13 @@
     </div>
 
     <div class="car-grid" id="carGrid">
+
       <article class="car-card" data-brand="Lamborghini" data-name="Huracán STO">
         <div class="car-image">
-          <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=1000&q=85" alt="Lamborghini supercar" loading="lazy">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Huracan_STO.jpg"
+               alt="Lamborghini Huracán STO"
+               loading="lazy"
+               onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=1000&q=85'">
         </div>
         <div class="car-info">
           <div class="car-brand">LAMBORGHINI</div>
@@ -380,7 +354,9 @@
 
       <article class="car-card" data-brand="Bugatti" data-name="Chiron">
         <div class="car-image">
-          <img src="https://images.unsplash.com/photo-1600712242805-5f78671b24da?auto=format&fit=crop&w=1000&q=85" alt="Bugatti-style hypercar" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1600712242805-5f78671b24da?auto=format&fit=crop&w=1000&q=85"
+               alt="Bugatti Chiron"
+               loading="lazy">
         </div>
         <div class="car-info">
           <div class="car-brand">BUGATTI</div>
@@ -397,7 +373,10 @@
 
       <article class="car-card" data-brand="Nissan" data-name="GT-R R35">
         <div class="car-image">
-          <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=85" alt="Japanese performance car" loading="lazy">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nissan_GT-R_R35_1.jpg"
+               alt="Nissan GT-R R35"
+               loading="lazy"
+               onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=85'">
         </div>
         <div class="car-info">
           <div class="car-brand">NISSAN</div>
@@ -414,7 +393,9 @@
 
       <article class="car-card" data-brand="McLaren" data-name="720S">
         <div class="car-image">
-          <img src="https://images.unsplash.com/photo-1621135802920-133df287f89c?auto=format&fit=crop&w=1000&q=85" alt="McLaren-style supercar" loading="lazy">
+          <img src="images/mclaren-720s.jpg"
+               alt="McLaren 720S"
+               loading="lazy">
         </div>
         <div class="car-info">
           <div class="car-brand">MCLAREN</div>
@@ -431,7 +412,9 @@
 
       <article class="car-card" data-brand="Porsche" data-name="911 GT3 RS">
         <div class="car-image">
-          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=85" alt="Porsche sports car" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=85"
+               alt="Porsche 911 GT3 RS"
+               loading="lazy">
         </div>
         <div class="car-info">
           <div class="car-brand">PORSCHE</div>
@@ -449,8 +432,9 @@
       <div class="empty" id="emptyMessage">NO MACHINES FOUND. TRY ANOTHER SEARCH.</div>
     </div>
 
-    <p style="margin-top:24px;color:#777;font-size:11px;line-height:1.7;">
-      *Performance figures vary by model year, version and market. Images are illustrative and may not depict the exact model.
+    <p class="image-note">
+      *Performance figures may vary by model year and version.
+      Some photographs are illustrative and may not depict the exact model.
     </p>
   </main>
 
@@ -500,9 +484,9 @@
 
     function updateFavoriteButtons() {
       document.querySelectorAll(".favorite-btn").forEach(button => {
-        const isFavorite = favorites.includes(button.dataset.id);
-        button.classList.toggle("active", isFavorite);
-        button.textContent = isFavorite ? "✓ SAVED TO GARAGE" : "＋ ADD TO GARAGE";
+        const saved = favorites.includes(button.dataset.id);
+        button.classList.toggle("active", saved);
+        button.textContent = saved ? "✓ SAVED TO GARAGE" : "＋ ADD TO GARAGE";
       });
     }
 
@@ -518,8 +502,8 @@
 
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
-        } catch {
-          // The page still works if browser storage is unavailable.
+        } catch (error) {
+          console.warn("Browser storage is unavailable.", error);
         }
 
         updateFavoriteButtons();
