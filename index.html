@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="VELOCITY — A world driven by performance.">
+  <title>VELOCITY — Automotive Culture</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --red: #ff2638;
+      --black: #080808;
+      --muted: #999;
+      --line: rgba(255,255,255,.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: white;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .topbar {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7%;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      z-index: 5;
+    }
+
+    .logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .logo span { color: var(--red); }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+    }
+
+    .nav a { color: #bbb; transition: color .2s; }
+    .nav a:hover { color: white; }
+
+    .nav .nav-cta {
+      color: white;
+      border: 1px solid var(--red);
+      padding: 12px 16px;
+    }
+
+    .hero {
+      min-height: 690px;
+      height: calc(100svh - 82px);
+      max-height: 900px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      padding: 60px 7%;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(90deg, #080808 0%, rgba(8,8,8,.88) 28%,
+        rgba(8,8,8,.23) 72%, rgba(8,8,8,.4) 100%),
+        linear-gradient(0deg, #080808 0%, transparent 35%),
+        url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=85")
+        center 58% / cover no-repeat;
+      transform: scale(1.04);
+      animation: reveal 1.2s ease-out both;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(115deg, transparent 60%,
+        rgba(255,38,56,.12) 100%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 720px;
+      animation: rise .9s .15s both;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--red);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      background: var(--red);
+    }
+
+    h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(78px, 13vw, 166px);
+      font-weight: 900;
+      line-height: .78;
+      letter-spacing: -4px;
+      text-transform: uppercase;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--red);
+    }
+
+    .hero-description {
+      color: #c4c4c4;
+      font-size: 13px;
+      line-height: 1.9;
+      max-width: 365px;
+      margin-top: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .btn {
+      min-height: 48px;
+      padding: 0 22px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: transform .2s, background .2s;
+    }
+
+    .btn:hover { transform: translateY(-3px); }
+
+    .btn-primary {
+      background: var(--red);
+      border: 1px solid var(--red);
+      color: white;
+    }
+
+    .btn-primary:hover { background: #d91527; }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(0,0,0,.25);
+      color: white;
+    }
+
+    .hero-index {
+      position: absolute;
+      right: 7%;
+      bottom: 55px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
+
+    .hero-index .line {
+      width: 65px;
+      height: 2px;
+      background: var(--red);
+    }
+
+    .ticker {
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 18px 0;
+      white-space: nowrap;
+    }
+
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: ticker 28s linear infinite;
+    }
+
+    .ticker span {
+      padding: 0 30px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 3px;
+    }
+
+    .ticker b { color: var(--red); }
+
+    .section {
+      padding: 100px 7%;
+    }
+
+    .section-label {
+      color: var(--red);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      margin-bottom: 16px;
+    }
+
+    .section h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: .95;
+      text-transform: uppercase;
+    }
+
+    .section h2 span { color: var(--red); }
+
+    .section-copy {
+      max-width: 450px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 42px;
+    }
+
+    .feature-card {
+      min-height: 210px;
+      border: 1px solid var(--line);
+      padding: 28px;
+      background: linear-gradient(145deg, #141414, #090909);
+      transition: border-color .25s, transform .25s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--red);
+      transform: translateY(-4px);
+    }
+
+    .feature-number {
+      color: var(--red);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .feature-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 29px;
+      margin-top: 26px;
+      text-transform: uppercase;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+      margin-top: 10px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 30px 7%;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+      color: #777;
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+
+    footer strong { color: white; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(22px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes reveal {
+      from { opacity: .4; transform: scale(1.1); }
+      to { opacity: 1; transform: scale(1.04); }
+    }
+
+    @keyframes ticker {
+      to { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 760px) {
+      .topbar { height: 70px; padding: 0 5%; }
+      .logo { font-size: 27px; }
+      .nav { gap: 14px; }
+      .nav a { font-size: 9px; letter-spacing: .5px; }
+      .nav a:nth-child(2),
+      .nav a:nth-child(3) { display: none; }
+      .nav .nav-cta { padding: 10px; }
+      .hero {
+        min-height: 680px;
+        height: calc(100svh - 70px);
+        padding: 40px 6%;
+      }
+      .hero::before {
+        background:
+          linear-gradient(90deg, rgba(8,8,8,.8), rgba(8,8,8,.25)),
+          linear-gradient(0deg, #080808, transparent 75%),
+          url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=80")
+          58% center / cover no-repeat;
+      }
+      h1 { letter-spacing: -2px; }
+      .hero-index { right: 6%; bottom: 30px; }
+      .section { padding: 72px 6%; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .feature-card { min-height: 170px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="logo" href="#" aria-label="VELOCITY início">VELO<span>CITY</span></a>
+
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#vision">VISION</a>
+      <a href="#features">EXPERIENCE</a>
+      <a href="#features" class="nav-cta">EXPLORE <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="VELOCITY Automotive Culture">
+      <div class="hero-content">
+        <div class="eyebrow">AUTOMOTIVE CULTURE · EST. 2026</div>
+
+        <h1>BEYOND <span>LIMITS.</span></h1>
+
+        <p class="hero-description">
+          More than machines. A world built around speed, engineering
+          and the emotion of every revolution per minute.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#features" class="btn btn-primary">
+            ENTER VELOCITY <span aria-hidden="true">↗</span>
+          </a>
+          <a href="#vision" class="btn btn-secondary">
+            OUR VISION
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-index">
+        <span>01</span><span class="line"></span><span>THE BEGINNING</span>
+      </div>
+    </section>
+
+    <div class="ticker" aria-label="VELOCITY principles">
+      <div class="ticker-track" aria-hidden="true">
+        <span>PURE PERFORMANCE <b>✳</b></span>
+        <span>ENGINEERING WITHOUT LIMITS <b>✳</b></span>
+        <span>BUILT FOR THE OBSESSED <b>✳</b></span>
+        <span>PURE PERFORMANCE <b>✳</b></span>
+        <span>ENGINEERING WITHOUT LIMITS <b>✳</b></span>
+        <span>BUILT FOR THE OBSESSED <b>✳</b></span>
+      </div>
+    </div>
+
+    <section class="section" id="vision">
+      <div class="section-label">01 / THE PHILOSOPHY</div>
+      <h2>NOT JUST CARS.<br><span>AN OBSESSION.</span></h2>
+      <p class="section-copy">
+        Every machine has a story. Every engine has a voice.
+        VELOCITY brings together the machines, the engineering
+        and the people who live for automotive culture.
+      </p>
+    </section>
+
+    <section class="section" id="features" style="padding-top: 0">
+      <div class="section-label">02 / THE EXPERIENCE</div>
+      <h2>ENTER THE <span>WORLD.</span></h2>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-number">01 / DISCOVER</div>
+          <h3>The Machines</h3>
+          <p>Explore remarkable cars, their specifications and the engineering behind them.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-number">02 / COMPARE</div>
+          <h3>Performance Lab</h3>
+          <p>Put two machines head to head and compare their real-world specifications.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-number">03 / COLLECT</div>
+          <h3>Your Garage</h3>
+          <p>Build your own collection of favourites and make it yours.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>VELO<span style="color:#ff2638">CITY</span></strong>
+    <span>BUILT FOR THE AUTOMOTIVE OBSESSED.</span>
+    <span>© 2026 VELOCITY</span>
+  </footer>
+
+  <script>
+    document.title = "VELOCITY — Automotive Culture";
+
+    // Smooth navigation for browsers that support it.
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener("click", event => {
+        const target = document.querySelector(link.getAttribute("href"));
+        if (target) {
+          event.preventDefault();
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
