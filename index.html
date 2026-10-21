@@ -1,11 +1,12 @@
 
+
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#080808">
-  <meta name="description" content="VELOCITY — A world driven by performance.">
+  <meta name="description" content="VELOCITY — Premium Automotive Culture">
   <title>VELOCITY — Automotive Culture</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +23,10 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 30px;
+    }
 
     body {
       background: var(--black);
@@ -35,7 +39,7 @@
     button { font: inherit; }
 
     .topbar {
-      height: 82px;
+      min-height: 82px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -43,6 +47,7 @@
       border-bottom: 1px solid var(--line);
       position: relative;
       z-index: 5;
+      background: #080808;
     }
 
     .logo {
@@ -52,7 +57,7 @@
       letter-spacing: 2px;
     }
 
-    .logo span { color: var(--red); }
+    .logo span, footer span { color: var(--red); }
 
     .nav {
       display: flex;
@@ -90,12 +95,10 @@
       inset: 0;
       z-index: -2;
       background:
-        linear-gradient(90deg, #080808 0%, rgba(8,8,8,.88) 28%,
-        rgba(8,8,8,.23) 72%, rgba(8,8,8,.4) 100%),
-        linear-gradient(0deg, #080808 0%, transparent 35%),
+        linear-gradient(90deg, #080808 0%, rgba(8,8,8,.85) 30%, rgba(8,8,8,.18) 100%),
+        linear-gradient(0deg, #080808 0%, transparent 40%),
         url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=85")
         center 58% / cover no-repeat;
-      transform: scale(1.04);
       animation: reveal 1.2s ease-out both;
     }
 
@@ -104,8 +107,7 @@
       position: absolute;
       inset: 0;
       z-index: -1;
-      background: linear-gradient(115deg, transparent 60%,
-        rgba(255,38,56,.12) 100%);
+      background: linear-gradient(115deg, transparent 60%, rgba(255,38,56,.12));
       pointer-events: none;
     }
 
@@ -141,10 +143,7 @@
       text-transform: uppercase;
     }
 
-    h1 span {
-      display: block;
-      color: var(--red);
-    }
+    h1 span { display: block; color: var(--red); }
 
     .hero-description {
       color: #c4c4c4;
@@ -237,6 +236,7 @@
 
     .section {
       padding: 100px 7%;
+      scroll-margin-top: 20px;
     }
 
     .section-label {
@@ -257,7 +257,7 @@
     .section h2 span { color: var(--red); }
 
     .section-copy {
-      max-width: 450px;
+      max-width: 520px;
       margin-top: 18px;
       color: var(--muted);
       font-size: 13px;
@@ -272,16 +272,20 @@
     }
 
     .feature-card {
-      min-height: 210px;
+      min-height: 220px;
+      display: block;
       border: 1px solid var(--line);
       padding: 28px;
       background: linear-gradient(145deg, #141414, #090909);
-      transition: border-color .25s, transform .25s;
+      transition: border-color .25s, transform .25s, background .25s;
     }
 
-    .feature-card:hover {
+    .feature-card:hover,
+    .feature-card:focus-visible {
       border-color: var(--red);
-      transform: translateY(-4px);
+      background: linear-gradient(145deg, #201012, #090909);
+      transform: translateY(-5px);
+      outline: none;
     }
 
     .feature-number {
@@ -304,6 +308,54 @@
       line-height: 1.8;
       margin-top: 10px;
     }
+
+    .card-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: var(--red);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+    }
+
+    .destination {
+      min-height: 330px;
+      border-top: 1px solid var(--line);
+      position: relative;
+    }
+
+    .destination:nth-of-type(even) {
+      background: linear-gradient(110deg, #101010, #080808 65%);
+    }
+
+    .destination-inner {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .destination-tag {
+      display: inline-block;
+      color: #aaa;
+      border: 1px solid var(--line);
+      padding: 10px 14px;
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-top: 24px;
+    }
+
+    .destination-tag span { color: var(--red); }
+
+    .back-top {
+      color: #aaa;
+      font-size: 11px;
+      letter-spacing: 1px;
+      transition: color .2s;
+    }
+
+    .back-top:hover { color: var(--red); }
 
     footer {
       border-top: 1px solid var(--line);
@@ -334,18 +386,19 @@
     }
 
     @media (max-width: 760px) {
-      .topbar { height: 70px; padding: 0 5%; }
+      .topbar { min-height: 70px; padding: 0 5%; }
       .logo { font-size: 27px; }
       .nav { gap: 14px; }
       .nav a { font-size: 9px; letter-spacing: .5px; }
-      .nav a:nth-child(2),
-      .nav a:nth-child(3) { display: none; }
+      .nav a:nth-child(2) { display: none; }
       .nav .nav-cta { padding: 10px; }
+
       .hero {
         min-height: 680px;
         height: calc(100svh - 70px);
         padding: 40px 6%;
       }
+
       .hero::before {
         background:
           linear-gradient(90deg, rgba(8,8,8,.8), rgba(8,8,8,.25)),
@@ -353,11 +406,14 @@
           url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=80")
           58% center / cover no-repeat;
       }
+
       h1 { letter-spacing: -2px; }
       .hero-index { right: 6%; bottom: 30px; }
       .section { padding: 72px 6%; }
       .feature-grid { grid-template-columns: 1fr; }
-      .feature-card { min-height: 170px; }
+      .feature-card { min-height: 180px; }
+      .destination-inner { align-items: flex-start; flex-direction: column; }
+      footer { padding: 25px 6%; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -371,14 +427,14 @@
   </style>
 </head>
 
-<body>
+<body id="top">
   <header class="topbar">
-    <a class="logo" href="#" aria-label="VELOCITY início">VELO<span>CITY</span></a>
+    <a class="logo" href="#top" aria-label="VELOCITY início">VELO<span>CITY</span></a>
 
     <nav class="nav" aria-label="Navegação principal">
       <a href="#vision">VISION</a>
       <a href="#features">EXPERIENCE</a>
-      <a href="#features" class="nav-cta">EXPLORE <span aria-hidden="true">↗</span></a>
+      <a href="#machines" class="nav-cta">EXPLORE ↗</a>
     </nav>
   </header>
 
@@ -386,7 +442,6 @@
     <section class="hero" aria-label="VELOCITY Automotive Culture">
       <div class="hero-content">
         <div class="eyebrow">AUTOMOTIVE CULTURE · EST. 2026</div>
-
         <h1>BEYOND <span>LIMITS.</span></h1>
 
         <p class="hero-description">
@@ -395,12 +450,10 @@
         </p>
 
         <div class="hero-actions">
-          <a href="#features" class="btn btn-primary">
+          <a href="#machines" class="btn btn-primary">
             ENTER VELOCITY <span aria-hidden="true">↗</span>
           </a>
-          <a href="#vision" class="btn btn-secondary">
-            OUR VISION
-          </a>
+          <a href="#vision" class="btn btn-secondary">OUR VISION</a>
         </div>
       </div>
 
@@ -435,43 +488,100 @@
       <h2>ENTER THE <span>WORLD.</span></h2>
 
       <div class="feature-grid">
-        <article class="feature-card">
+        <a href="#machines" class="feature-card">
           <div class="feature-number">01 / DISCOVER</div>
           <h3>The Machines</h3>
           <p>Explore remarkable cars, their specifications and the engineering behind them.</p>
-        </article>
+          <span class="card-link">EXPLORE CARS ↗</span>
+        </a>
 
-        <article class="feature-card">
+        <a href="#performance" class="feature-card">
           <div class="feature-number">02 / COMPARE</div>
           <h3>Performance Lab</h3>
-          <p>Put two machines head to head and compare their real-world specifications.</p>
-        </article>
+          <p>Compare power, torque, acceleration and top speed.</p>
+          <span class="card-link">COMPARE CARS ↗</span>
+        </a>
 
-        <article class="feature-card">
+        <a href="#garage" class="feature-card">
           <div class="feature-number">03 / COLLECT</div>
           <h3>Your Garage</h3>
           <p>Build your own collection of favourites and make it yours.</p>
-        </article>
+          <span class="card-link">OPEN GARAGE ↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- DESTINATION 1: THE MACHINES -->
+    <section class="section destination" id="machines">
+      <div class="destination-inner">
+        <div>
+          <div class="section-label">03 / THE COLLECTION</div>
+          <h2>THE <span>MACHINES.</span></h2>
+          <p class="section-copy">
+            Discover remarkable supercars, legendary JDM machines
+            and the engineering behind their performance.
+          </p>
+          <div class="destination-tag"><span>01</span> / CAR DATABASE — COMING NEXT</div>
+        </div>
+        <a href="#features" class="back-top">← BACK TO EXPERIENCE</a>
+      </div>
+    </section>
+
+    <!-- DESTINATION 2: PERFORMANCE LAB -->
+    <section class="section destination" id="performance">
+      <div class="destination-inner">
+        <div>
+          <div class="section-label">04 / PERFORMANCE LAB</div>
+          <h2>BUILT TO <span>DOMINATE.</span></h2>
+          <p class="section-copy">
+            Compare horsepower, torque, acceleration, top speed
+            and weight. Find out how your favourite machines stack up.
+          </p>
+          <div class="destination-tag"><span>02</span> / CAR COMPARATOR — COMING NEXT</div>
+        </div>
+        <a href="#features" class="back-top">← BACK TO EXPERIENCE</a>
+      </div>
+    </section>
+
+    <!-- DESTINATION 3: YOUR GARAGE -->
+    <section class="section destination" id="garage">
+      <div class="destination-inner">
+        <div>
+          <div class="section-label">05 / YOUR COLLECTION</div>
+          <h2>YOUR <span>GARAGE.</span></h2>
+          <p class="section-copy">
+            Your dream cars. Your collection. Your rules.
+            Save your favourite machines and build your personal garage.
+          </p>
+          <div class="destination-tag"><span>03</span> / FAVOURITES — COMING NEXT</div>
+        </div>
+        <a href="#features" class="back-top">← BACK TO EXPERIENCE</a>
       </div>
     </section>
   </main>
 
   <footer>
-    <strong>VELO<span style="color:#ff2638">CITY</span></strong>
+    <strong>VELO<span>CITY</span></strong>
     <span>BUILT FOR THE AUTOMOTIVE OBSESSED.</span>
     <span>© 2026 VELOCITY</span>
   </footer>
 
   <script>
-    document.title = "VELOCITY — Automotive Culture";
-
-    // Smooth navigation for browsers that support it.
     document.querySelectorAll('a[href^="#"]').forEach(link => {
       link.addEventListener("click", event => {
-        const target = document.querySelector(link.getAttribute("href"));
+        const href = link.getAttribute("href");
+        const target = document.querySelector(href);
+
         if (target) {
           event.preventDefault();
-          target.scrollIntoView({ behavior: "smooth" });
+          target.scrollIntoView({
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+              ? "auto"
+              : "smooth",
+            block: "start"
+          });
+
+          history.replaceState(null, "", href);
         }
       });
     });
