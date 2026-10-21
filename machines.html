@@ -5,11 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Machines | VELOCITY</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-:root{--red:#ff2638;--bg:#080808;--panel:#111;--muted:#999}
+:root{--red:#ff2638;--bg:#080808;--panel:#111}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:#fff;font-family:Arial,Helvetica,sans-serif}
+body{margin:0;background:var(--bg);color:#fff;font-family:Arial,sans-serif}
 header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;border-bottom:1px solid #252525}
 .logo{font-size:23px;font-weight:900;letter-spacing:3px;color:white;text-decoration:none}
 .logo span{color:var(--red)}
@@ -17,22 +16,20 @@ nav{display:flex;gap:20px;flex-wrap:wrap}
 nav a{color:#aaa;text-decoration:none;font-size:11px;letter-spacing:1.5px}
 nav a:hover,nav a.active{color:var(--red)}
 main{max-width:1200px;margin:auto;padding:55px 7%}
-.eyebrow{color:var(--red);font-size:11px;letter-spacing:4px}
+.eyebrow,.tag{color:var(--red);font-size:11px;letter-spacing:3px}
 h1{font-size:clamp(42px,7vw,76px);margin:15px 0}
 h1 span{color:var(--red)}
 .intro{color:#aaa;line-height:1.7;max-width:650px}
 .toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:32px 0}
 input,select{padding:13px;background:#151515;color:white;border:1px solid #333;border-radius:5px;min-width:180px;flex:1}
-input:focus,select:focus{outline:1px solid var(--red)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
 .card{background:var(--panel);border:1px solid #292929;border-radius:9px;overflow:hidden;display:flex;flex-direction:column}
 .car-image{width:100%;height:190px;object-fit:cover;background:#181818;display:block}
 .card-content{padding:18px;display:flex;flex-direction:column;flex:1}
-.tag{color:var(--red);font-size:10px;letter-spacing:2px}
-h2{font-size:20px;line-height:1.35;margin:12px 0}
+h2{font-size:20px;line-height:1.4;margin:12px 0}
 .specs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0 20px}
 .spec{background:#191919;padding:11px;border-radius:5px}
-.spec strong{display:block;font-size:17px}
+.spec strong{display:block;font-size:16px}
 .spec small{display:block;color:#888;font-size:10px;margin-top:5px}
 .actions{display:flex;gap:8px;margin-top:auto;flex-wrap:wrap}
 .actions a,.actions button{padding:11px 12px;font-size:10px;font-weight:bold;text-decoration:none;border-radius:4px;cursor:pointer}
@@ -58,7 +55,7 @@ footer{text-align:center;color:#666;border-top:1px solid #222;padding:25px;font-
 <main>
 <div class="eyebrow">VELOCITY / AUTOMOTIVE COLLECTION</div>
 <h1>THE <span>MACHINES.</span></h1>
-<p class="intro">De supercarros icónicos aos hypercars extremos. Explora a coleção, compara as máquinas e guarda as tuas favoritas na tua garagem.</p>
+<p class="intro">De supercarros icónicos aos hypercars extremos. Explora a coleção e guarda as tuas máquinas favoritas.</p>
 
 <div class="toolbar">
 <input id="search" type="search" placeholder="Search machines..." aria-label="Pesquisar carros">
@@ -74,7 +71,6 @@ footer{text-align:center;color:#666;border-top:1px solid #222;padding:25px;font-
 <option value="Mercedes-AMG">MERCEDES-AMG</option>
 </select>
 </div>
-
 <div class="grid" id="carsGrid"></div>
 </main>
 
@@ -114,35 +110,36 @@ image:"https://commons.wikimedia.org/wiki/Special:FilePath/2024_Porsche_911_GT3_
 {
 id:"ferrari-sf90",name:"Ferrari SF90 Stradale",brand:"Ferrari",
 power:"1.000 cv",speed:"340 km/h",accel:"2.5 s",
-image:"images/Ferrari_SF90.jpg"
+image:"https://commons.wikimedia.org/wiki/Special:FilePath/2021_Ferrari_SF90_Stradale.jpg"
 },
 {
 id:"koenigsegg-jesko",name:"Koenigsegg Jesko",brand:"Koenigsegg",
-power:"Até 1.600 cv",speed:"Versão dependente",accel:"Versão dependente",
-image:"images/Koegnigsegg_Jesko.jpg"
+power:"Até 1.600 cv",speed:"Depende da versão",accel:"Depende da versão",
+image:"https://commons.wikimedia.org/wiki/Special:FilePath/Koenigsegg_Jesko.jpg"
 },
 {
 id:"lamborghini-svj",name:"Lamborghini Aventador SVJ",brand:"Lamborghini",
 power:"770 cv",speed:"350 km/h",accel:"2.8 s",
-image:"images/Lamborghini_SVJ.jpg"
+image:"https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Aventador_SVJ.jpg"
 },
 {
 id:"mercedes-amg-one",name:"Mercedes-AMG ONE",brand:"Mercedes-AMG",
 power:"1.063 cv",speed:"352 km/h",accel:"2.9 s",
-image:"images/Mercedes_AMG_One.jpg"
+image:"https://commons.wikimedia.org/wiki/Special:FilePath/Mercedes_AMG_One.jpg",
+fallback:"https://commons.wikimedia.org/wiki/Special:FilePath/2023_Mercedes_AMG_One.jpg"
 },
 {
 id:"mclaren-p1",name:"McLaren P1",brand:"McLaren",
 power:"916 cv",speed:"350 km/h",accel:"2.8 s",
-image:"images/Mclaren_P1.jpg"
+image:"https://commons.wikimedia.org/wiki/Special:FilePath/McLaren_P1.jpg"
 }
 ];
 
 function getFavorites(){
 try{
-const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
-return Array.isArray(saved)?saved:[];
-}catch(error){return [];}
+const value=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
+return Array.isArray(value)?value:[];
+}catch(error){return []}
 }
 
 function renderCars(){
@@ -156,7 +153,6 @@ const filtered=cars.filter(car=>
 );
 
 const grid=document.getElementById("carsGrid");
-
 if(!filtered.length){
 grid.innerHTML='<div class="empty">No machines found. Try another search.</div>';
 return;
@@ -168,8 +164,7 @@ grid.innerHTML=filtered.map(car=>`
 src="${car.image}"
 alt="${car.name}"
 loading="lazy"
-onerror="if(this.dataset.fallbackTried!=='yes'&&this.dataset.fallback){this.dataset.fallbackTried='yes';this.src=this.dataset.fallback}else{this.onerror=null;this.src='https://placehold.co/800x450/111111/ff2638?text=VELOCITY'}"
-${car.fallback?`data-fallback="${car.fallback}"`:""}>
+data-fallback="${car.fallback||""}">
 <div class="card-content">
 <div class="tag">${car.brand.toUpperCase()} / MACHINE</div>
 <h2>${car.name}</h2>
@@ -187,6 +182,19 @@ ${favorites.includes(car.id)?"♥ SAVED":"♡ FAVORITE"}
 </div>
 </article>
 `).join("");
+
+grid.querySelectorAll(".car-image").forEach(img=>{
+img.addEventListener("error",function(){
+const fallback=this.dataset.fallback;
+if(fallback && this.src!==fallback){
+this.dataset.fallback="";
+this.src=fallback;
+}else{
+this.onerror=null;
+this.src="https://placehold.co/800x450/111111/ff2638?text=VELOCITY";
+}
+},{once:true});
+});
 
 grid.querySelectorAll("[data-favorite]").forEach(button=>{
 button.addEventListener("click",()=>{
