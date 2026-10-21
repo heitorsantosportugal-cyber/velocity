@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Performance Lab | VELOCITY</title>
+<style>
+:root{--red:#ff2638;--bg:#080808;--panel:#111;--muted:#999}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#fff;font-family:Arial,Helvetica,sans-serif}
+header{height:auto;min-height:76px;padding:22px 7%;display:flex;justify-content:space-between;align-items:center;gap:20px;border-bottom:1px solid #252525;flex-wrap:wrap}
+.logo{font-size:23px;font-weight:900;letter-spacing:3px;color:white;text-decoration:none}
+.logo span{color:var(--red)}
+nav{display:flex;gap:22px;flex-wrap:wrap}
+nav a{color:#aaa;text-decoration:none;font-size:11px;letter-spacing:1.5px}
+nav a:hover,nav a.active{color:var(--red)}
+main{max-width:1100px;margin:auto;padding:65px 7%}
+.eyebrow{color:var(--red);font-size:11px;letter-spacing:4px;font-weight:bold}
+h1{font-size:clamp(38px,7vw,76px);margin:16px 0}
+h1 span{color:var(--red)}
+.intro{color:#aaa;line-height:1.7;max-width:620px}
+.panel{margin-top:35px;background:var(--panel);border:1px solid #292929;padding:25px;border-radius:12px}
+label{display:block;color:#aaa;font-size:12px;margin-bottom:9px}
+select,button{width:100%;padding:14px;background:#171717;color:white;border:1px solid #393939;border-radius:6px;font-size:14px}
+select:focus{outline:1px solid var(--red)}
+.pickers{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}
+.car{padding:22px;background:#0b0b0b;border:1px solid #282828;border-radius:8px}
+.car h2{font-size:20px;margin:8px 0 22px}
+.stat{display:flex;justify-content:space-between;gap:10px;padding:13px 0;border-bottom:1px solid #252525;color:#aaa;font-size:13px}
+.stat strong{color:white;text-align:right}
+.winner{margin-top:20px;padding:18px;border-left:3px solid var(--red);background:#191010;line-height:1.6}
+button{margin-top:20px;background:var(--red);border:0;font-weight:bold;cursor:pointer}
+button:hover{background:#d91d2d}
+.note{font-size:11px;color:#777;line-height:1.6;margin-top:18px}
+footer{text-align:center;color:#666;border-top:1px solid #222;padding:25px;font-size:11px;letter-spacing:2px}
+@media(max-width:650px){.pickers,.compare{grid-template-columns:1fr}main{padding-top:45px}header{padding:20px 6%}nav{gap:13px}}
+</style>
+</head>
+<body>
+<header>
+<a class="logo" href="index.html">VELO<span>CITY</span></a>
+<nav>
+<a href="index.html">HOME</a>
+<a href="machines.html">MACHINES</a>
+<a class="active" href="performance.html">PERFORMANCE</a>
+<a href="garage.html">GARAGE</a>
+</nav>
+</header>
+<main>
+<div class="eyebrow">VELOCITY / ENGINEERING DIVISION</div>
+<h1>PERFORMANCE <span>LAB.</span></h1>
+<p class="intro">Dois supercarros. Uma comparação. Escolhe as máquinas e descobre as diferenças de potência, velocidade e aceleração.</p>
+
+<section class="panel">
+<div class="pickers">
+<div>
+<label for="carA">MÁQUINA A</label>
+<select id="carA">
+<option value="huracan">Lamborghini Huracán STO</option>
+<option value="chiron">Bugatti Chiron</option>
+<option value="gtr">Nissan GT-R R35</option>
+<option value="mclaren">McLaren 720S</option>
+<option value="porsche">Porsche 911 GT3 RS</option>
+</select>
+</div>
+<div>
+<label for="carB">MÁQUINA B</label>
+<select id="carB">
+<option value="chiron">Bugatti Chiron</option>
+<option value="huracan">Lamborghini Huracán STO</option>
+<option value="gtr">Nissan GT-R R35</option>
+<option value="mclaren">McLaren 720S</option>
+<option value="porsche">Porsche 911 GT3 RS</option>
+</select>
+</div>
+</div>
+<button id="compareBtn">RUN COMPARISON ↗</button>
+<div class="compare" id="results" aria-live="polite"></div>
+<div class="winner" id="winner">Escolhe as máquinas e inicia a comparação.</div>
+<p class="note">Valores aproximados de versões específicas; podem variar consoante o ano, configuração e mercado. O resultado compara apenas os valores apresentados e não significa que um carro seja melhor em todos os aspetos.</p>
+</section>
+</main>
+<footer>VELOCITY © 2026 — BEYOND LIMITS</footer>
+<script>
+const cars={
+huracan:{name:"Lamborghini Huracán STO",power:640,speed:310,accel:3.0},
+chiron:{name:"Bugatti Chiron",power:1500,speed:420,accel:2.4},
+gtr:{name:"Nissan GT-R R35",power:570,speed:315,accel:2.8},
+mclaren:{name:"McLaren 720S",power:720,speed:341,accel:2.9},
+porsche:{name:"Porsche 911 GT3 RS",power:525,speed:296,accel:3.2}
+};
+function renderComparison(){
+const a=cars[document.getElementById("carA").value];
+const b=cars[document.getElementById("carB").value];
+const metrics=[["Potência", "power"," cv",true],["Velocidade máxima","speed"," km/h",true],["0–100 km/h","accel"," s",false]];
+document.getElementById("results").innerHTML=[a,b].map((car,i)=>`
+<div class="car">
+<div class="eyebrow">MACHINE 0${i+1}</div>
+<h2>${car.name}</h2>
+${metrics.map(([label,key,unit])=>`<div class="stat"><span>${label}</span><strong>${car[key]}${unit}</strong></div>`).join("")}
+</div>`).join("");
+if(a.name===b.name){
+document.getElementById("winner").textContent="Selecionaste a mesma máquina dos dois lados. Escolhe dois carros diferentes para comparar.";
+return;
+}
+const winsA=metrics.filter(([label,key,,higher])=>higher?a[key]>b[key]:a[key]<b[key]).length;
+const winsB=metrics.length-winsA;
+let message=winsA>winsB?`${a.name} vence em mais dos critérios apresentados.`:winsB>winsA?`${b.name} vence em mais dos critérios apresentados.`:"Empate: cada máquina tem vantagens diferentes.";
+document.getElementById("winner").textContent=message;
+}
+document.getElementById("compareBtn").addEventListener("click",renderComparison);
+renderComparison();
+</script>
+</body>
+</html>
