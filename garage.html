@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -6,36 +7,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Your Garage | VELOCITY</title>
 <style>
-:root{--red:#ff2638;--bg:#080808;--panel:#111}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:#fff;font-family:Arial,Helvetica,sans-serif}
-header{min-height:76px;padding:22px 7%;display:flex;justify-content:space-between;align-items:center;gap:20px;border-bottom:1px solid #252525;flex-wrap:wrap}
+:root{--red:#ff2638;--bg:#080808;--panel:#111}
+body{margin:0;background:var(--bg);color:white;font-family:Arial,sans-serif}
+header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;border-bottom:1px solid #252525}
 .logo{font-size:23px;font-weight:900;letter-spacing:3px;color:white;text-decoration:none}
 .logo span{color:var(--red)}
-nav{display:flex;gap:22px;flex-wrap:wrap}
-nav a{color:#aaa;text-decoration:none;font-size:11px;letter-spacing:1.5px}
+nav{display:flex;gap:20px;flex-wrap:wrap}
+nav a{font-size:11px;letter-spacing:1px;color:#aaa;text-decoration:none}
 nav a:hover,nav a.active{color:var(--red)}
-main{max-width:1100px;margin:auto;padding:65px 7%}
-.eyebrow{color:var(--red);font-size:11px;letter-spacing:4px;font-weight:bold}
-h1{font-size:clamp(40px,7vw,76px);margin:16px 0}
+main{max-width:1150px;margin:auto;padding:60px 7%}
+.eyebrow{color:var(--red);font-size:11px;letter-spacing:4px}
+h1{font-size:clamp(40px,7vw,74px);margin:15px 0}
 h1 span{color:var(--red)}
-.intro{color:#aaa;line-height:1.7;max-width:600px}
-.toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin:35px 0 22px}
-.count{color:#aaa;font-size:13px}
-button{padding:12px 18px;background:#171717;color:white;border:1px solid #393939;border-radius:5px;cursor:pointer}
+.intro{color:#999;line-height:1.7}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin:35px 0 20px}
+#count{font-size:12px;color:#aaa;letter-spacing:1px}
+button{background:#171717;color:white;border:1px solid #444;padding:12px 15px;border-radius:4px;cursor:pointer}
 button:hover{border-color:var(--red);color:var(--red)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
-.card{background:var(--panel);border:1px solid #292929;border-radius:9px;padding:22px;display:flex;flex-direction:column;min-height:210px}
-.card .tag{color:var(--red);font-size:10px;letter-spacing:2px}
-.card h2{font-size:21px;line-height:1.35}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:20px}
+.card{background:var(--panel);border:1px solid #292929;border-radius:9px;overflow:hidden;display:flex;flex-direction:column}
+.car-image{width:100%;height:190px;object-fit:cover;display:block;background:#181818}
+.card-content{padding:20px;display:flex;flex-direction:column;flex:1}
+.tag{color:var(--red);font-size:10px;letter-spacing:2px}
+h2{font-size:20px;line-height:1.4}
 .card p{color:#999;font-size:13px;line-height:1.6}
-.card .actions{display:flex;gap:10px;margin-top:auto;flex-wrap:wrap}
-.card a{display:inline-block;padding:11px 13px;background:var(--red);color:white;text-decoration:none;font-size:11px;font-weight:bold;border-radius:4px}
-.card button{font-size:11px}
-.empty{padding:35px 20px;border:1px dashed #444;border-radius:8px;color:#aaa;line-height:1.8;text-align:center;grid-column:1/-1}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:auto;padding-top:12px}
+.actions a,.actions button{font-size:11px;text-decoration:none;padding:11px 12px}
+.actions a{background:var(--red);color:white;border-radius:4px;font-weight:bold}
+.empty{grid-column:1/-1;text-align:center;padding:35px 20px;border:1px dashed #444;color:#aaa;line-height:1.8}
 .empty a{color:var(--red)}
 footer{text-align:center;color:#666;border-top:1px solid #222;padding:25px;font-size:11px;letter-spacing:2px}
-@media(max-width:650px){header{padding:20px 6%}nav{gap:13px}main{padding-top:45px}}
+@media(max-width:600px){header{padding:20px 6%}nav{gap:12px}main{padding:40px 6%}}
 </style>
 </head>
 <body>
@@ -48,54 +51,96 @@ footer{text-align:center;color:#666;border-top:1px solid #222;padding:25px;font-
 <a class="active" href="garage.html">GARAGE</a>
 </nav>
 </header>
+
 <main>
 <div class="eyebrow">VELOCITY / PERSONAL COLLECTION</div>
 <h1>YOUR <span>GARAGE.</span></h1>
-<p class="intro">A tua coleção. As tuas máquinas. Guarda aqui os carros que mais te impressionam.</p>
+<p class="intro">As tuas máquinas favoritas. A tua coleção pessoal.</p>
+
 <div class="toolbar">
-<div class="count" id="count" aria-live="polite">A carregar coleção...</div>
+<div id="count">A carregar coleção...</div>
 <button id="refresh">↻ REFRESH GARAGE</button>
 </div>
 <div class="grid" id="garage"></div>
 </main>
+
 <footer>VELOCITY © 2026 — YOUR MACHINES. YOUR RULES.</footer>
+
 <script>
 const STORAGE_KEY="velocity-favorite-cars";
+
 const cars={
-huracan:{name:"Lamborghini Huracán STO",brand:"LAMBORGHINI"},
-chiron:{name:"Bugatti Chiron",brand:"BUGATTI"},
-gtr:{name:"Nissan GT-R R35",brand:"NISSAN"},
-mclaren:{name:"McLaren 720S",brand:"MCLAREN"},
-porsche:{name:"Porsche 911 GT3 RS",brand:"PORSCHE"}
+huracan:{
+name:"Lamborghini Huracán STO",
+brand:"LAMBORGHINI",
+image:"https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Huracan_STO.jpg"
+},
+chiron:{
+name:"Bugatti Chiron",
+brand:"BUGATTI",
+image:"https://images.unsplash.com/photo-1600712242805-5f78671b24da?auto=format&fit=crop&w=900&q=85"
+},
+gtr:{
+name:"Nissan GT-R R35",
+brand:"NISSAN",
+image:"https://commons.wikimedia.org/wiki/Special:FilePath/Nissan_GT-R_R35.jpg"
+},
+mclaren:{
+name:"McLaren 720S",
+brand:"MCLAREN",
+image:"https://commons.wikimedia.org/wiki/Special:FilePath/2019_Mclaren_720S.jpg"
+},
+porsche:{
+name:"Porsche 911 GT3 RS",
+brand:"PORSCHE",
+image:"https://commons.wikimedia.org/wiki/Special:FilePath/2024_Porsche_911_GT3_RS_992.jpg"
+}
 };
+
 function getFavorites(){
 try{
-const value=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
-return Array.isArray(value)?value:[];
-}catch(error){return [];}
+const data=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
+return Array.isArray(data)?data:[];
+}catch(error){
+return [];
 }
+}
+
 function renderGarage(){
-const saved=getFavorites();
+const favorites=getFavorites();
 const garage=document.getElementById("garage");
+
 document.getElementById("count").textContent=
-`${saved.length} ${saved.length===1?"MÁQUINA GUARDADA":"MÁQUINAS GUARDADAS"}`;
-if(!saved.length){
-garage.innerHTML='<div class="empty">A tua garagem ainda está vazia.<br>Vai a <a href="machines.html">MACHINES</a> e adiciona os teus carros favoritos.</div>';
+favorites.length+" "+(favorites.length===1?"MÁQUINA GUARDADA":"MÁQUINAS GUARDADAS");
+
+if(favorites.length===0){
+garage.innerHTML='<div class="empty">Ainda não tens carros guardados.<br>Visita <a href="machines.html">MACHINES</a> e adiciona os teus favoritos!</div>';
 return;
 }
-garage.innerHTML=saved.map(id=>{
+
+garage.innerHTML=favorites.map(id=>{
 const car=cars[id];
 if(!car)return "";
-return `<article class="card">
+
+return `
+<article class="card">
+<img class="car-image"
+src="${car.image}"
+alt="${car.name}"
+loading="lazy"
+onerror="this.onerror=null;this.src='https://placehold.co/800x450/111111/ff2638?text=VELOCITY';">
+<div class="card-content">
 <div class="tag">${car.brand} / SAVED MACHINE</div>
 <h2>${car.name}</h2>
-<p>Faz parte da tua coleção pessoal VELOCITY.</p>
+<p>Parte da tua coleção pessoal VELOCITY.</p>
 <div class="actions">
 <a href="machines.html">VIEW MACHINES ↗</a>
 <button type="button" data-remove="${id}">REMOVE ×</button>
 </div>
+</div>
 </article>`;
 }).join("");
+
 garage.querySelectorAll("[data-remove]").forEach(button=>{
 button.addEventListener("click",()=>{
 const id=button.dataset.remove;
@@ -105,7 +150,9 @@ renderGarage();
 });
 });
 }
+
 document.getElementById("refresh").addEventListener("click",renderGarage);
+window.addEventListener("storage",renderGarage);
 renderGarage();
 </script>
 </body>
