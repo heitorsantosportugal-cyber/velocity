@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>VELOCITY — Machine Details</title>
+<style>
+:root {
+  --red: #ff2638;
+  --bg: #080808;
+  --panel: #111;
+  --muted: #999;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+a { color: inherit; text-decoration: none; }
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 7%;
+  border-bottom: 1px solid #242424;
+}
+.logo { font-size: 22px; font-weight: 900; letter-spacing: 4px; }
+.logo span { color: var(--red); }
+nav { display: flex; gap: 24px; font-size: 12px; letter-spacing: 1px; }
+nav a:hover, .back:hover { color: var(--red); }
+main { max-width: 1200px; margin: auto; padding: 45px 6% 80px; }
+.eyebrow { color: var(--red); letter-spacing: 3px; font-size: 11px; font-weight: bold; }
+h1 { font-size: clamp(38px, 7vw, 78px); margin: 14px 0; line-height: .98; text-transform: uppercase; }
+.subtitle { color: var(--muted); line-height: 1.7; max-width: 650px; }
+.hero {
+  position: relative;
+  margin: 35px 0;
+  background: #111;
+  border: 1px solid #282828;
+  overflow: hidden;
+}
+.hero img {
+  width: 100%;
+  height: clamp(250px, 48vw, 570px);
+  object-fit: cover;
+  display: block;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 45% 0 0;
+  background: linear-gradient(transparent, rgba(0,0,0,.45));
+  pointer-events: none;
+}
+.specs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 25px 0 45px;
+}
+.spec {
+  padding: 22px 16px;
+  background: var(--panel);
+  border: 1px solid #242424;
+}
+.spec strong { display: block; font-size: clamp(21px, 3vw, 34px); margin-bottom: 10px; }
+.spec span { font-size: 10px; color: var(--muted); letter-spacing: 1.5px; }
+.section-title { font-size: 24px; text-transform: uppercase; margin-bottom: 20px; }
+.details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.detail {
+  padding: 18px;
+  background: #101010;
+  border-bottom: 1px solid #292929;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+.detail span { color: var(--muted); }
+.detail strong { text-align: right; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 38px; }
+.btn {
+  padding: 15px 21px;
+  background: var(--red);
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.btn.secondary { background: transparent; border: 1px solid #444; }
+.btn:hover { filter: brightness(1.2); }
+footer {
+  padding: 25px 6%;
+  border-top: 1px solid #242424;
+  color: #777;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+@media(max-width:650px) {
+  header { padding: 20px 5%; }
+  nav { gap: 12px; font-size: 10px; }
+  .specs { grid-template-columns: repeat(2, 1fr); }
+  .details { grid-template-columns: 1fr; }
+  main { padding: 35px 5% 60px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="index.html">VELO<span>CITY</span></a>
+  <nav>
+    <a href="index.html">HOME</a>
+    <a href="machines.html">MACHINES</a>
+    <a href="garage.html">GARAGE</a>
+  </nav>
+</header>
+
+<main>
+  <div class="eyebrow" id="number">MACHINE / 001</div>
+  <h1 id="name">Loading machine...</h1>
+  <p class="subtitle" id="description"></p>
+
+  <div class="hero">
+    <img id="carImage" src="" alt="Supercar" />
+  </div>
+
+  <div class="eyebrow">PERFORMANCE DATA</div>
+  <div class="specs">
+    <div class="spec"><strong id="power">—</strong><span>HORSEPOWER</span></div>
+    <div class="spec"><strong id="acceleration">—</strong><span>0–100 KM/H</span></div>
+    <div class="spec"><strong id="speed">—</strong><span>TOP SPEED</span></div>
+    <div class="spec"><strong id="engine">—</strong><span>ENGINE</span></div>
+  </div>
+
+  <h2 class="section-title">Technical overview</h2>
+  <div class="details">
+    <div class="detail"><span>Manufacturer</span><strong id="brand">—</strong></div>
+    <div class="detail"><span>Drivetrain</span><strong id="drive">—</strong></div>
+    <div class="detail"><span>Transmission</span><strong id="transmission">—</strong></div>
+    <div class="detail"><span>Category</span><strong id="category">—</strong></div>
+  </div>
+
+  <div class="actions">
+    <a class="btn" href="machines.html">← EXPLORE ALL MACHINES</a>
+    <a class="btn secondary" href="index.html">BACK TO VELOCITY</a>
+  </div>
+</main>
+
+<footer>VELOCITY — BUILT FOR THE AUTOMOTIVE OBSESSED. © 2026</footer>
+
+<script>
+const cars = {
+  huracan: {
+    number: "MACHINE / 001",
+    name: "Lamborghini Huracán STO",
+    brand: "Lamborghini",
+    description: "A road-legal machine inspired by Lamborghini's motorsport heritage. Naturally aspirated V10 power meets track-focused aerodynamics.",
+    power: "640 CV",
+    acceleration: "3.0 s",
+    speed: "310 km/h",
+    engine: "5.2L V10",
+    drive: "Rear-wheel drive",
+    transmission: "7-speed dual-clutch",
+    category: "Track-focused supercar",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Huracan_STO.jpg"
+  },
+  chiron: {
+    number: "MACHINE / 002",
+    name: "Bugatti Chiron",
+    brand: "Bugatti",
+    description: "A grand touring hypercar built around immense W16 power, exceptional refinement and extraordinary high-speed performance.",
+    power: "1500 PS",
+    acceleration: "2.4 s",
+    speed: "420 km/h*",
+    engine: "8.0L W16",
+    drive: "All-wheel drive",
+    transmission: "7-speed dual-clutch",
+    category: "Hypercar",
+    image: "https://images.unsplash.com/photo-1600705722908-bab1e4b5e4a5?auto=format&fit=crop&w=1600&q=85"
+  },
+  gtr: {
+    number: "MACHINE / 003",
+    name: "Nissan GT-R R35",
+    brand: "Nissan",
+    description: "A Japanese performance icon combining a twin-turbo V6, advanced all-wheel drive and relentless acceleration.",
+    power: "565 hp**",
+    acceleration: "2.9 s**",
+    speed: "315 km/h**",
+    engine: "3.8L V6 biturbo",
+    drive: "All-wheel drive",
+    transmission: "6-speed dual-clutch",
+    category: "Performance coupe",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Nissan_GT-R_R35.jpg"
+  },
+  mclaren: {
+    number: "MACHINE / 004",
+    name: "McLaren 720S",
+    brand: "McLaren",
+    description: "A lightweight supercar whose carbon-fibre structure, twin-turbo V8 and aerodynamic design deliver an intense driving experience.",
+    power: "720 PS",
+    acceleration: "2.9 s",
+    speed: "341 km/h",
+    engine: "4.0L V8 biturbo",
+    drive: "Rear-wheel drive",
+    transmission: "7-speed dual-clutch",
+    category: "Supercar",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/2019_Mclaren_720S.jpg"
+  },
+  porsche: {
+    number: "MACHINE / 005",
+    name: "Porsche 911 GT3 RS",
+    brand: "Porsche",
+    description: "A precision-engineered track machine focused on aerodynamic downforce, sharp handling and a high-revving naturally aspirated flat-six.",
+    power: "525 PS",
+    acceleration: "3.2 s",
+    speed: "296 km/h",
+    engine: "4.0L flat-six",
+    drive: "Rear-wheel drive",
+    transmission: "7-speed PDK",
+    category: "Track-focused sports car",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/2024_Porsche_911_GT3_RS_992.jpg"
+  }
+};
+
+const params = new URLSearchParams(window.location.search);
+const key = params.get("car") || "huracan";
+const car = cars[key];
+
+if (!car) {
+  document.getElementById("name").textContent = "Machine not found";
+  document.getElementById("description").textContent =
+    "This machine is not available yet. Return to the collection and choose another car.";
+  document.getElementById("number").textContent = "404 / UNKNOWN MACHINE";
+  document.getElementById("carImage").style.display = "none";
+  document.querySelector(".specs").style.display = "none";
+  document.querySelector(".details").style.display = "none";
+} else {
+  document.title = "VELOCITY — " + car.name;
+  Object.entries(car).forEach(([key, value]) => {
+    const element = document.getElementById(key);
+    if (element && key !== "image") element.textContent = value;
+  });
+
+  const img = document.getElementById("carImage");
+  img.src = car.image;
+  img.alt = car.name;
+  img.onerror = () => {
+    img.onerror = null;
+    img.src = "https://placehold.co/1600x900/111111/ff2638?text=VELOCITY";
+  };
+}
+</script>
+</body>
+</html>
