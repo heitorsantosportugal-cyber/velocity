@@ -1,9 +1,11 @@
 
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
 <title>Machines | VELOCITY</title>
 <style>
 :root{--red:#ff2638;--bg:#080808;--panel:#111}
@@ -23,7 +25,8 @@ h1 span{color:var(--red)}
 .toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:32px 0}
 input,select{padding:13px;background:#151515;color:white;border:1px solid #333;border-radius:5px;min-width:180px;flex:1}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
-.card{background:var(--panel);border:1px solid #292929;border-radius:9px;overflow:hidden;display:flex;flex-direction:column}
+.card{background:var(--panel);border:1px solid #292929;border-radius:9px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,border-color .25s}
+.card:hover{transform:translateY(-4px);border-color:#66202a}
 .car-image{width:100%;height:190px;object-fit:cover;background:#181818;display:block}
 .card-content{padding:18px;display:flex;flex-direction:column;flex:1}
 h2{font-size:20px;line-height:1.4;margin:12px 0}
@@ -33,12 +36,14 @@ h2{font-size:20px;line-height:1.4;margin:12px 0}
 .spec small{display:block;color:#888;font-size:10px;margin-top:5px}
 .actions{display:flex;gap:8px;margin-top:auto;flex-wrap:wrap}
 .actions a,.actions button{padding:11px 12px;font-size:10px;font-weight:bold;text-decoration:none;border-radius:4px;cursor:pointer}
-.actions a{background:var(--red);color:white}
+.actions a{background:var(--red);color:white;border:1px solid var(--red)}
+.actions a.compare{background:transparent;border-color:#444}
+.actions a:hover{filter:brightness(1.2)}
 .actions button{background:#191919;color:white;border:1px solid #444}
 .actions button.saved{color:var(--red);border-color:var(--red)}
 .empty{color:#aaa;padding:30px;text-align:center;grid-column:1/-1;border:1px dashed #444}
 footer{text-align:center;color:#666;border-top:1px solid #222;padding:25px;font-size:11px;letter-spacing:2px}
-@media(max-width:600px){header{padding:20px 6%}nav{gap:12px}main{padding:40px 6%}}
+@media(max-width:600px){header{padding:20px 6%}nav{gap:12px}main{padding:40px 6%}.actions a,.actions button{flex:1;text-align:center}}
 </style>
 </head>
 <body>
@@ -55,7 +60,7 @@ footer{text-align:center;color:#666;border-top:1px solid #222;padding:25px;font-
 <main>
 <div class="eyebrow">VELOCITY / AUTOMOTIVE COLLECTION</div>
 <h1>THE <span>MACHINES.</span></h1>
-<p class="intro">De supercarros icónicos aos hypercars extremos. Explora a coleção e guarda as tuas máquinas favoritas.</p>
+<p class="intro">De supercarros icónicos aos hypercars extremos. Explora a coleção, consulta as fichas técnicas e guarda as tuas máquinas favoritas.</p>
 
 <div class="toolbar">
 <input id="search" type="search" placeholder="Search machines..." aria-label="Pesquisar carros">
@@ -71,147 +76,172 @@ footer{text-align:center;color:#666;border-top:1px solid #222;padding:25px;font-
 <option value="Mercedes-AMG">MERCEDES-AMG</option>
 </select>
 </div>
+
 <div class="grid" id="carsGrid"></div>
 </main>
 
 <footer>VELOCITY © 2026 — BEYOND LIMITS</footer>
 
 <script>
-const STORAGE_KEY="velocity-favorite-cars";
+const STORAGE_KEY = "velocity-favorite-cars";
 
-const cars=[
+const cars = [
 {
-id:"huracan",name:"Lamborghini Huracán STO",brand:"Lamborghini",
+id:"huracan",detailKey:"huracan",
+name:"Lamborghini Huracán STO",brand:"Lamborghini",
 power:"640 cv",speed:"310 km/h",accel:"3.0 s",
 image:"https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Huracan_STO.jpg",
 fallback:"https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=900&q=85"
 },
 {
-id:"chiron",name:"Bugatti Chiron",brand:"Bugatti",
+id:"chiron",detailKey:"chiron",
+name:"Bugatti Chiron",brand:"Bugatti",
 power:"1.500 cv",speed:"420 km/h",accel:"2.4 s",
-image:"https://images.unsplash.com/photo-1600712242805-5f78671b24da?auto=format&fit=crop&w=900&q=85"
+image:"https://commons.wikimedia.org/wiki/Special:FilePath/Bugatti_Chiron_2017.jpg"
 },
 {
-id:"gtr",name:"Nissan GT-R R35",brand:"Nissan",
+id:"gtr",detailKey:"gtr",
+name:"Nissan GT-R R35",brand:"Nissan",
 power:"570 cv",speed:"315 km/h",accel:"2.8 s",
 image:"https://commons.wikimedia.org/wiki/Special:FilePath/Nissan_GT-R_R35.jpg",
 fallback:"https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=900&q=85"
 },
 {
-id:"mclaren",name:"McLaren 720S",brand:"McLaren",
+id:"mclaren",detailKey:"mclaren",
+name:"McLaren 720S",brand:"McLaren",
 power:"720 cv",speed:"341 km/h",accel:"2.9 s",
 image:"https://commons.wikimedia.org/wiki/Special:FilePath/2019_Mclaren_720S.jpg"
 },
 {
-id:"porsche",name:"Porsche 911 GT3 RS",brand:"Porsche",
+id:"porsche",detailKey:"porsche",
+name:"Porsche 911 GT3 RS",brand:"Porsche",
 power:"525 cv",speed:"296 km/h",accel:"3.2 s",
 image:"https://commons.wikimedia.org/wiki/Special:FilePath/2024_Porsche_911_GT3_RS_992.jpg"
 },
 {
-id:"ferrari-sf90",name:"Ferrari SF90 Stradale",brand:"Ferrari",
+id:"ferrari-sf90",
+name:"Ferrari SF90 Stradale",brand:"Ferrari",
 power:"1.000 cv",speed:"340 km/h",accel:"2.5 s",
 image:"https://commons.wikimedia.org/wiki/Special:FilePath/2021_Ferrari_SF90_Stradale.jpg"
 },
 {
-id:"koenigsegg-jesko",name:"Koenigsegg Jesko",brand:"Koenigsegg",
+id:"koenigsegg-jesko",
+name:"Koenigsegg Jesko",brand:"Koenigsegg",
 power:"Até 1.600 cv",speed:"Depende da versão",accel:"Depende da versão",
 image:"https://commons.wikimedia.org/wiki/Special:FilePath/Koenigsegg_Jesko.jpg"
 },
 {
-id:"lamborghini-svj",name:"Lamborghini Aventador SVJ",brand:"Lamborghini",
+id:"lamborghini-svj",
+name:"Lamborghini Aventador SVJ",brand:"Lamborghini",
 power:"770 cv",speed:"350 km/h",accel:"2.8 s",
 image:"https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Aventador_SVJ.jpg"
 },
 {
-id:"mercedes-amg-one",name:"Mercedes-AMG ONE",brand:"Mercedes-AMG",
+id:"mercedes-amg-one",
+name:"Mercedes-AMG ONE",brand:"Mercedes-AMG",
 power:"1.063 cv",speed:"352 km/h",accel:"2.9 s",
 image:"https://commons.wikimedia.org/wiki/Special:FilePath/Mercedes_AMG_One.jpg",
 fallback:"https://commons.wikimedia.org/wiki/Special:FilePath/2023_Mercedes_AMG_One.jpg"
 },
 {
-id:"mclaren-p1",name:"McLaren P1",brand:"McLaren",
+id:"mclaren-p1",
+name:"McLaren P1",brand:"McLaren",
 power:"916 cv",speed:"350 km/h",accel:"2.8 s",
 image:"https://commons.wikimedia.org/wiki/Special:FilePath/McLaren_P1.jpg"
 }
 ];
 
 function getFavorites(){
-try{
-const value=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
-return Array.isArray(value)?value:[];
-}catch(error){return []}
+  try {
+    const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    return Array.isArray(value) ? value : [];
+  } catch(error) {
+    return [];
+  }
 }
 
 function renderCars(){
-const search=document.getElementById("search").value.toLowerCase().trim();
-const brand=document.getElementById("brandFilter").value;
-const favorites=getFavorites();
+  const search = document.getElementById("search").value.toLowerCase().trim();
+  const brand = document.getElementById("brandFilter").value;
+  const favorites = getFavorites();
 
-const filtered=cars.filter(car=>
-(car.name.toLowerCase().includes(search)||car.brand.toLowerCase().includes(search))&&
-(brand==="all"||car.brand===brand)
-);
+  const filtered = cars.filter(car =>
+    (car.name.toLowerCase().includes(search) ||
+     car.brand.toLowerCase().includes(search)) &&
+    (brand === "all" || car.brand === brand)
+  );
 
-const grid=document.getElementById("carsGrid");
-if(!filtered.length){
-grid.innerHTML='<div class="empty">No machines found. Try another search.</div>';
-return;
+  const grid = document.getElementById("carsGrid");
+
+  if(!filtered.length){
+    grid.innerHTML = '<div class="empty">No machines found. Try another search.</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(car => `
+    <article class="card">
+      <img class="car-image"
+        src="${car.image}"
+        alt="${car.name}"
+        loading="lazy"
+        data-fallback="${car.fallback || ""}">
+
+      <div class="card-content">
+        <div class="tag">${car.brand.toUpperCase()} / MACHINE</div>
+        <h2>${car.name}</h2>
+
+        <div class="specs">
+          <div class="spec"><strong>${car.power}</strong><small>POWER</small></div>
+          <div class="spec"><strong>${car.speed}</strong><small>TOP SPEED</small></div>
+          <div class="spec"><strong>${car.accel}</strong><small>0–100 KM/H</small></div>
+        </div>
+
+        <div class="actions">
+          <button class="${favorites.includes(car.id) ? "saved" : ""}"
+            data-favorite="${car.id}">
+            ${favorites.includes(car.id) ? "♥ SAVED" : "♡ FAVORITE"}
+          </button>
+
+          ${car.detailKey
+            ? `<a href="car.html?car=${car.detailKey}">VIEW DETAILS ↗</a>`
+            : `<a class="compare" href="performance.html">COMPARE ↗</a>`
+          }
+        </div>
+      </div>
+    </article>
+  `).join("");
+
+  grid.querySelectorAll(".car-image").forEach(img => {
+    img.onerror = function(){
+      const fallback = this.dataset.fallback;
+      if(fallback){
+        this.dataset.fallback = "";
+        this.src = fallback;
+      } else {
+        this.onerror = null;
+        this.src = "https://placehold.co/800x450/111111/ff2638?text=VELOCITY";
+      }
+    };
+  });
+
+  grid.querySelectorAll("[data-favorite]").forEach(button => {
+    button.addEventListener("click", () => {
+      const id = button.dataset.favorite;
+      const updated = getFavorites();
+      const index = updated.indexOf(id);
+
+      if(index >= 0) updated.splice(index, 1);
+      else updated.push(id);
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      renderCars();
+    });
+  });
 }
 
-grid.innerHTML=filtered.map(car=>`
-<article class="card">
-<img class="car-image"
-src="${car.image}"
-alt="${car.name}"
-loading="lazy"
-data-fallback="${car.fallback||""}">
-<div class="card-content">
-<div class="tag">${car.brand.toUpperCase()} / MACHINE</div>
-<h2>${car.name}</h2>
-<div class="specs">
-<div class="spec"><strong>${car.power}</strong><small>POWER</small></div>
-<div class="spec"><strong>${car.speed}</strong><small>TOP SPEED</small></div>
-<div class="spec"><strong>${car.accel}</strong><small>0–100 KM/H</small></div>
-</div>
-<div class="actions">
-<button class="${favorites.includes(car.id)?"saved":""}" data-favorite="${car.id}">
-${favorites.includes(car.id)?"♥ SAVED":"♡ FAVORITE"}
-</button>
-<a href="performance.html">COMPARE ↗</a>
-</div>
-</div>
-</article>
-`).join("");
-
-grid.querySelectorAll(".car-image").forEach(img=>{
-img.addEventListener("error",function(){
-const fallback=this.dataset.fallback;
-if(fallback && this.src!==fallback){
-this.dataset.fallback="";
-this.src=fallback;
-}else{
-this.onerror=null;
-this.src="https://placehold.co/800x450/111111/ff2638?text=VELOCITY";
-}
-},{once:true});
-});
-
-grid.querySelectorAll("[data-favorite]").forEach(button=>{
-button.addEventListener("click",()=>{
-const id=button.dataset.favorite;
-const updated=getFavorites();
-const index=updated.indexOf(id);
-if(index>=0)updated.splice(index,1);
-else updated.push(id);
-localStorage.setItem(STORAGE_KEY,JSON.stringify(updated));
-renderCars();
-});
-});
-}
-
-document.getElementById("search").addEventListener("input",renderCars);
-document.getElementById("brandFilter").addEventListener("change",renderCars);
-window.addEventListener("storage",renderCars);
+document.getElementById("search").addEventListener("input", renderCars);
+document.getElementById("brandFilter").addEventListener("change", renderCars);
+window.addEventListener("storage", renderCars);
 renderCars();
 </script>
 </body>
