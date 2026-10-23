@@ -1,52 +1,47 @@
 
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080808">
-<title>VELOCITY — Machine Details</title>
+<title>Machines | VELOCITY</title>
 <style>
-:root{--red:#ff2638;--bg:#080808;--panel:#111;--muted:#999}
+:root{--red:#ff2638;--bg:#080808;--panel:#111}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:#fff;font-family:Arial,Helvetica,sans-serif}
-a{color:inherit;text-decoration:none}
-header{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;padding:24px 7%;border-bottom:1px solid #242424}
-.logo{font-size:22px;font-weight:900;letter-spacing:4px}
+body{margin:0;background:var(--bg);color:#fff;font-family:Arial,sans-serif}
+header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;border-bottom:1px solid #252525}
+.logo{font-size:23px;font-weight:900;letter-spacing:3px;color:white;text-decoration:none}
 .logo span{color:var(--red)}
-nav{display:flex;gap:22px;flex-wrap:wrap}
-nav a{font-size:11px;letter-spacing:1px;color:#aaa}
-nav a:hover{color:var(--red)}
-main{max-width:1200px;margin:auto;padding:45px 6% 80px}
-.eyebrow{color:var(--red);letter-spacing:3px;font-size:11px;font-weight:bold}
-h1{font-size:clamp(38px,7vw,78px);margin:14px 0;line-height:.98;text-transform:uppercase}
-.subtitle{color:var(--muted);line-height:1.8;max-width:720px}
-.hero{margin:35px 0;background:#111;border:1px solid #282828;overflow:hidden}
-.hero img{width:100%;height:clamp(250px,48vw,570px);object-fit:cover;display:block}
-.specs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:25px 0 45px}
-.spec{padding:22px 16px;background:var(--panel);border:1px solid #242424}
-.spec strong{display:block;font-size:clamp(20px,3vw,34px);margin-bottom:10px}
-.spec span{font-size:10px;color:var(--muted);letter-spacing:1.5px}
-.section-title{font-size:24px;text-transform:uppercase;margin-bottom:20px}
-.details{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.detail{padding:18px;background:#101010;border-bottom:1px solid #292929;display:flex;justify-content:space-between;gap:15px}
-.detail span{color:var(--muted)}
-.detail strong{text-align:right}
-.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:38px}
-.btn{padding:15px 21px;background:var(--red);color:#fff;font-size:11px;font-weight:bold;letter-spacing:1px}
-.btn.secondary{background:transparent;border:1px solid #444}
-.btn:hover{filter:brightness(1.2)}
-.note{font-size:12px;color:#777;line-height:1.7;margin-top:25px}
-footer{padding:25px 6%;border-top:1px solid #242424;color:#777;font-size:10px;letter-spacing:2px}
-@media(max-width:650px){
-header{padding:20px 5%}
-nav{gap:12px}
-.specs{grid-template-columns:repeat(2,1fr)}
-.details{grid-template-columns:1fr}
-main{padding:35px 5% 60px}
-}
+nav{display:flex;gap:20px;flex-wrap:wrap}
+nav a{color:#aaa;text-decoration:none;font-size:11px;letter-spacing:1.5px}
+nav a:hover,nav a.active{color:var(--red)}
+main{max-width:1200px;margin:auto;padding:55px 7%}
+.eyebrow,.tag{color:var(--red);font-size:11px;letter-spacing:3px}
+h1{font-size:clamp(42px,7vw,76px);margin:15px 0}
+h1 span{color:var(--red)}
+.intro{color:#aaa;line-height:1.7;max-width:650px}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:32px 0}
+input,select{padding:13px;background:#151515;color:white;border:1px solid #333;border-radius:5px;min-width:180px;flex:1}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.card{background:var(--panel);border:1px solid #292929;border-radius:9px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-4px);border-color:#66202a}
+.car-image{width:100%;height:190px;object-fit:cover;background:#181818;display:block}
+.card-content{padding:18px;display:flex;flex-direction:column;flex:1}
+h2{font-size:20px;line-height:1.4;margin:12px 0}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0 20px}
+.spec{background:#191919;padding:11px;border-radius:5px}
+.spec strong{display:block;font-size:16px}
+.spec small{display:block;color:#888;font-size:10px;margin-top:5px}
+.actions{display:flex;gap:8px;margin-top:auto;flex-wrap:wrap}
+.actions a,.actions button{padding:11px 12px;font-size:10px;font-weight:bold;text-decoration:none;border-radius:4px;cursor:pointer}
+.actions a{background:var(--red);color:white;border:1px solid var(--red)}
+.actions a.compare{background:#191919;border-color:#444}
+.actions button{background:#191919;color:white;border:1px solid #444}
+.actions button.saved{color:var(--red);border-color:var(--red)}
+.empty{color:#aaa;padding:30px;text-align:center;grid-column:1/-1;border:1px dashed #444}
+footer{text-align:center;color:#666;border-top:1px solid #222;padding:25px;font-size:11px;letter-spacing:2px}
+@media(max-width:600px){header{padding:20px 6%}nav{gap:12px}main{padding:40px 6%}.actions a,.actions button{flex:1;text-align:center}}
 </style>
 </head>
 <body>
@@ -54,216 +49,132 @@ main{padding:35px 5% 60px}
 <a class="logo" href="index.html">VELO<span>CITY</span></a>
 <nav>
 <a href="index.html">HOME</a>
-<a href="machines.html">MACHINES</a>
+<a class="active" href="machines.html">MACHINES</a>
 <a href="performance.html">PERFORMANCE</a>
 <a href="garage.html">GARAGE</a>
 </nav>
 </header>
 
 <main>
-<div class="eyebrow" id="number">VELOCITY / MACHINE</div>
-<h1 id="name">Loading machine...</h1>
-<p class="subtitle" id="description"></p>
+<div class="eyebrow">VELOCITY / AUTOMOTIVE COLLECTION</div>
+<h1>THE <span>MACHINES.</span></h1>
+<p class="intro">De supercarros icónicos aos hypercars extremos. Explora a coleção, consulta as fichas técnicas e guarda as tuas máquinas favoritas.</p>
 
-<div class="hero">
-<img id="carImage" src="" alt="Supercar">
+<div class="toolbar">
+<input id="search" type="search" placeholder="Search machines..." aria-label="Pesquisar carros">
+<select id="brandFilter" aria-label="Filtrar por marca">
+<option value="all">ALL BRANDS</option>
+<option value="Lamborghini">LAMBORGHINI</option>
+<option value="Bugatti">BUGATTI</option>
+<option value="Nissan">NISSAN</option>
+<option value="McLaren">MCLAREN</option>
+<option value="Porsche">PORSCHE</option>
+<option value="Ferrari">FERRARI</option>
+<option value="Koenigsegg">KOENIGSEGG</option>
+<option value="Mercedes-AMG">MERCEDES-AMG</option>
+</select>
 </div>
-
-<div class="eyebrow">PERFORMANCE DATA</div>
-<div class="specs">
-<div class="spec"><strong id="power">—</strong><span>HORSEPOWER</span></div>
-<div class="spec"><strong id="acceleration">—</strong><span>0–100 KM/H</span></div>
-<div class="spec"><strong id="speed">—</strong><span>TOP SPEED</span></div>
-<div class="spec"><strong id="engine">—</strong><span>ENGINE</span></div>
-</div>
-
-<h2 class="section-title">Technical overview</h2>
-<div class="details">
-<div class="detail"><span>Manufacturer</span><strong id="brand">—</strong></div>
-<div class="detail"><span>Drivetrain</span><strong id="drive">—</strong></div>
-<div class="detail"><span>Transmission</span><strong id="transmission">—</strong></div>
-<div class="detail"><span>Category</span><strong id="category">—</strong></div>
-</div>
-
-<p class="note">Specifications are indicative and may vary by model year, market, configuration and measurement method. Jesko performance figures depend on the version and conditions.</p>
-
-<div class="actions">
-<a class="btn" href="machines.html">← EXPLORE ALL MACHINES</a>
-<a class="btn secondary" href="index.html">BACK TO VELOCITY</a>
-</div>
+<div class="grid" id="carsGrid"></div>
 </main>
 
-<footer>VELOCITY — BUILT FOR THE AUTOMOTIVE OBSESSED. © 2026</footer>
+<footer>VELOCITY © 2026 — BEYOND LIMITS</footer>
 
 <script>
-const cars = {
-huracan: {
-number:"MACHINE / 001",
-name:"Lamborghini Huracán STO",
-brand:"Lamborghini",
-description:"A road-legal machine inspired by Lamborghini's motorsport heritage. Naturally aspirated V10 power meets track-focused aerodynamics.",
-power:"640 CV",acceleration:"3.0 s",speed:"310 km/h",
-engine:"5.2L V10",drive:"Rear-wheel drive",
-transmission:"7-speed dual-clutch",
-category:"Track-focused supercar",
-image:"https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Huracan_STO.jpg"
-},
-chiron: {
-number:"MACHINE / 002",
-name:"Bugatti Chiron",
-brand:"Bugatti",
-description:"A hypercar combining extraordinary W16 power, luxury and exceptional high-speed performance.",
-power:"1,500 PS",acceleration:"2.4 s",speed:"420 km/h*",
-engine:"8.0L W16 quad-turbo",
-drive:"All-wheel drive",
-transmission:"7-speed dual-clutch",
-category:"Hypercar",
-image:"https://commons.wikimedia.org/wiki/Special:FilePath/Bugatti_Chiron_2017.jpg"
-},
-gtr: {
-number:"MACHINE / 003",
-name:"Nissan GT-R R35",
-brand:"Nissan",
-description:"A Japanese performance icon combining a twin-turbo V6, advanced all-wheel drive and rapid acceleration.",
-power:"Approx. 570 hp",acceleration:"Approx. 2.8 s",speed:"Approx. 315 km/h",
-engine:"3.8L V6 biturbo",
-drive:"All-wheel drive",
-transmission:"6-speed dual-clutch",
-category:"Performance coupe",
-image:"https://commons.wikimedia.org/wiki/Special:FilePath/Nissan_GT-R_R35.jpg"
-},
-mclaren: {
-number:"MACHINE / 004",
-name:"McLaren 720S",
-brand:"McLaren",
-description:"A lightweight supercar with a carbon-fibre structure, twin-turbo V8 and aerodynamic design.",
-power:"720 PS",acceleration:"2.9 s",speed:"341 km/h",
-engine:"4.0L V8 biturbo",
-drive:"Rear-wheel drive",
-transmission:"7-speed dual-clutch",
-category:"Supercar",
-image:"https://commons.wikimedia.org/wiki/Special:FilePath/2019_Mclaren_720S.jpg"
-},
-porsche: {
-number:"MACHINE / 005",
-name:"Porsche 911 GT3 RS",
-brand:"Porsche",
-description:"A precision-engineered track machine focused on aerodynamic downforce, sharp handling and a high-revving naturally aspirated flat-six.",
-power:"525 PS",acceleration:"3.2 s",speed:"296 km/h",
-engine:"4.0L flat-six",
-drive:"Rear-wheel drive",
-transmission:"7-speed PDK",
-category:"Track-focused sports car",
-image:"https://commons.wikimedia.org/wiki/Special:FilePath/2024_Porsche_911_GT3_RS_992.jpg"
-},
-"ferrari-sf90": {
-number:"MACHINE / 006",
-name:"Ferrari SF90 Stradale",
-brand:"Ferrari",
-description:"A plug-in hybrid supercar combining a twin-turbo V8 with three electric motors for extraordinary combined performance.",
-power:"1,000 CV",acceleration:"2.5 s",speed:"340 km/h",
-engine:"4.0L V8 biturbo + electric motors",
-drive:"All-wheel drive",
-transmission:"8-speed dual-clutch",
-category:"Plug-in hybrid supercar",
-image:"https://commons.wikimedia.org/wiki/Special:FilePath/2021_Ferrari_SF90_Stradale.jpg"
-},
-"koenigsegg-jesko": {
-number:"MACHINE / 007",
-name:"Koenigsegg Jesko",
-brand:"Koenigsegg",
-description:"A Swedish hypercar engineered around a high-output twin-turbo V8, advanced aerodynamics and extreme performance. Absolut and Attack versions have different focuses.",
-power:"Up to 1,600 hp",
-acceleration:"Version-dependent",
-speed:"Version-dependent",
-engine:"5.0L V8 biturbo",
-drive:"Rear-wheel drive",
-transmission:"9-speed Light Speed Transmission",
-category:"High-performance hypercar",
-image:"https://commons.wikimedia.org/wiki/Special:FilePath/Koenigsegg_Jesko.jpg"
-},
-"lamborghini-svj": {
-number:"MACHINE / 008",
-name:"Lamborghini Aventador SVJ",
-brand:"Lamborghini",
-description:"A dramatic V12 supercar with active aerodynamics, all-wheel drive and a naturally aspirated engine built for high-revving performance.",
-power:"770 CV",acceleration:"2.8 s",speed:"350 km/h",
-engine:"6.5L V12",
-drive:"All-wheel drive",
-transmission:"7-speed ISR",
-category:"V12 supercar",
-image:"https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Aventador_SVJ.jpg"
-},
-"mercedes-amg-one": {
-number:"MACHINE / 009",
-name:"Mercedes-AMG ONE",
-brand:"Mercedes-AMG",
-description:"A road-legal hybrid hypercar bringing Formula 1-inspired powertrain technology and advanced aerodynamics to the road.",
-power:"1,063 PS",acceleration:"2.9 s",speed:"352 km/h",
-engine:"1.6L V6 hybrid",
-drive:"All-wheel drive",
-transmission:"Automated manual",
-category:"Hybrid hypercar",
-image:"https://commons.wikimedia.org/wiki/Special:FilePath/Mercedes_AMG_One.jpg",
-fallback:"https://commons.wikimedia.org/wiki/Special:FilePath/2023_Mercedes_AMG_One.jpg"
-},
-"mclaren-p1": {
-number:"MACHINE / 010",
-name:"McLaren P1",
-brand:"McLaren",
-description:"A landmark hybrid hypercar combining a twin-turbo V8, electric assistance and lightweight construction for intense performance.",
-power:"916 PS",acceleration:"2.8 s",speed:"350 km/h",
-engine:"3.8L V8 biturbo hybrid",
-drive:"Rear-wheel drive",
-transmission:"7-speed dual-clutch",
-category:"Hybrid hypercar",
-image:"https://commons.wikimedia.org/wiki/Special:FilePath/McLaren_P1.jpg"
+const STORAGE_KEY = "velocity-favorite-cars";
+
+const cars = [
+{id:"huracan",key:"huracan",name:"Lamborghini Huracán STO",brand:"Lamborghini",power:"640 cv",speed:"310 km/h",accel:"3.0 s",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Huracan_STO.jpg",fallback:"https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=900&q=85"},
+{id:"chiron",key:"chiron",name:"Bugatti Chiron",brand:"Bugatti",power:"1.500 cv",speed:"420 km/h",accel:"2.4 s",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Bugatti_Chiron_2017.jpg"},
+{id:"gtr",key:"gtr",name:"Nissan GT-R R35",brand:"Nissan",power:"570 cv",speed:"315 km/h",accel:"2.8 s",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Nissan_GT-R_R35.jpg",fallback:"https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=900&q=85"},
+{id:"mclaren",key:"mclaren",name:"McLaren 720S",brand:"McLaren",power:"720 cv",speed:"341 km/h",accel:"2.9 s",image:"https://commons.wikimedia.org/wiki/Special:FilePath/2019_Mclaren_720S.jpg"},
+{id:"porsche",key:"porsche",name:"Porsche 911 GT3 RS",brand:"Porsche",power:"525 cv",speed:"296 km/h",accel:"3.2 s",image:"https://commons.wikimedia.org/wiki/Special:FilePath/2024_Porsche_911_GT3_RS_992.jpg"},
+{id:"ferrari-sf90",key:"ferrari-sf90",name:"Ferrari SF90 Stradale",brand:"Ferrari",power:"1.000 cv",speed:"340 km/h",accel:"2.5 s",image:"https://commons.wikimedia.org/wiki/Special:FilePath/2021_Ferrari_SF90_Stradale.jpg"},
+{id:"koenigsegg-jesko",key:"koenigsegg-jesko",name:"Koenigsegg Jesko",brand:"Koenigsegg",power:"Até 1.600 cv",speed:"Consoante versão",accel:"Consoante versão",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Koenigsegg_Jesko.jpg"},
+{id:"lamborghini-svj",key:"lamborghini-svj",name:"Lamborghini Aventador SVJ",brand:"Lamborghini",power:"770 cv",speed:"350 km/h",accel:"2.8 s",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Aventador_SVJ.jpg"},
+{id:"mercedes-amg-one",key:"mercedes-amg-one",name:"Mercedes-AMG ONE",brand:"Mercedes-AMG",power:"1.063 cv",speed:"352 km/h",accel:"2.9 s",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Mercedes_AMG_One.jpg",fallback:"https://commons.wikimedia.org/wiki/Special:FilePath/2023_Mercedes_AMG_One.jpg"},
+{id:"mclaren-p1",key:"mclaren-p1",name:"McLaren P1",brand:"McLaren",power:"916 cv",speed:"350 km/h",accel:"2.8 s",image:"https://commons.wikimedia.org/wiki/Special:FilePath/McLaren_P1.jpg"}
+];
+
+function getFavorites(){
+  try{
+    const value=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
+    return Array.isArray(value)?value:[];
+  }catch(error){return []}
 }
-};
 
-const params = new URLSearchParams(window.location.search);
-const key = params.get("car") || "huracan";
-const car = cars[key];
+function renderCars(){
+  const search=document.getElementById("search").value.toLowerCase().trim();
+  const brand=document.getElementById("brandFilter").value;
+  const favorites=getFavorites();
 
-if (!car) {
-  document.title = "VELOCITY — Machine not found";
-  document.getElementById("name").textContent = "Machine not found";
-  document.getElementById("description").textContent =
-    "This machine is not available. Return to the collection and choose another car.";
-  document.getElementById("number").textContent = "404 / UNKNOWN MACHINE";
-  document.getElementById("carImage").style.display = "none";
-  document.querySelector(".specs").style.display = "none";
-  document.querySelector(".details").style.display = "none";
-} else {
-  document.title = "VELOCITY — " + car.name;
+  const filtered=cars.filter(car=>
+    (car.name.toLowerCase().includes(search)||car.brand.toLowerCase().includes(search))&&
+    (brand==="all"||car.brand===brand)
+  );
 
-  document.getElementById("number").textContent = car.number;
-  document.getElementById("name").textContent = car.name;
-  document.getElementById("description").textContent = car.description;
-  document.getElementById("power").textContent = car.power;
-  document.getElementById("acceleration").textContent = car.acceleration;
-  document.getElementById("speed").textContent = car.speed;
-  document.getElementById("engine").textContent = car.engine;
-  document.getElementById("brand").textContent = car.brand;
-  document.getElementById("drive").textContent = car.drive;
-  document.getElementById("transmission").textContent = car.transmission;
-  document.getElementById("category").textContent = car.category;
+  const grid=document.getElementById("carsGrid");
 
-  const img = document.getElementById("carImage");
-  img.alt = car.name;
+  if(!filtered.length){
+    grid.innerHTML='<div class="empty">No machines found. Try another search.</div>';
+    return;
+  }
 
-  let fallbackUsed = false;
-  img.onerror = function() {
-    if (car.fallback && !fallbackUsed) {
-      fallbackUsed = true;
-      img.src = car.fallback;
-    } else {
-      img.onerror = null;
-      img.src = "https://placehold.co/1600x900/111111/ff2638?text=VELOCITY";
-    }
-  };
-  img.src = car.image;
+  grid.innerHTML=filtered.map(car=>`
+    <article class="card">
+      <img class="car-image"
+        src="${car.image}"
+        alt="${car.name}"
+        loading="lazy"
+        data-fallback="${car.fallback||""}">
+      <div class="card-content">
+        <div class="tag">${car.brand.toUpperCase()} / MACHINE</div>
+        <h2>${car.name}</h2>
+        <div class="specs">
+          <div class="spec"><strong>${car.power}</strong><small>POWER</small></div>
+          <div class="spec"><strong>${car.speed}</strong><small>TOP SPEED</small></div>
+          <div class="spec"><strong>${car.accel}</strong><small>0–100 KM/H</small></div>
+        </div>
+        <div class="actions">
+          <button class="${favorites.includes(car.id)?"saved":""}" data-favorite="${car.id}">
+            ${favorites.includes(car.id)?"♥ SAVED":"♡ FAVORITE"}
+          </button>
+          <a href="car.html?car=${car.key}">VIEW DETAILS ↗</a>
+          <a class="compare" href="performance.html">COMPARE</a>
+        </div>
+      </div>
+    </article>
+  `).join("");
+
+  grid.querySelectorAll(".car-image").forEach(img=>{
+    img.onerror=function(){
+      const fallback=this.dataset.fallback;
+      if(fallback){
+        this.dataset.fallback="";
+        this.src=fallback;
+      }else{
+        this.onerror=null;
+        this.src="https://placehold.co/800x450/111111/ff2638?text=VELOCITY";
+      }
+    };
+  });
+
+  grid.querySelectorAll("[data-favorite]").forEach(button=>{
+    button.addEventListener("click",()=>{
+      const id=button.dataset.favorite;
+      const updated=getFavorites();
+      const index=updated.indexOf(id);
+      if(index>=0)updated.splice(index,1);
+      else updated.push(id);
+      localStorage.setItem(STORAGE_KEY,JSON.stringify(updated));
+      renderCars();
+    });
+  });
 }
+
+document.getElementById("search").addEventListener("input",renderCars);
+document.getElementById("brandFilter").addEventListener("change",renderCars);
+window.addEventListener("storage",renderCars);
+renderCars();
 </script>
 </body>
 </html>
