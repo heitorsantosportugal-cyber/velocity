@@ -1,251 +1,352 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VELOCITY — Engine Sound Lab</title>
+<title>Engine Sound Lab | VELOCITY</title>
+<meta name="theme-color" content="#080808">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-:root{
-  --red:#ff2638;
-  --bg:#080808;
-  --panel:#141414;
-  --muted:#999;
+:root {
+  --red: #ff2638;
+  --bg: #080808;
+  --panel: #111;
+  --muted: #999;
+  --border: #292929;
 }
 
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--bg);
-  color:white;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-header{
-  padding:24px 7%;
-  border-bottom:1px solid #252525;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  flex-wrap:wrap;
+body {
+  background: var(--bg);
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.logo{
-  font-size:27px;
-  font-weight:900;
-  letter-spacing:4px;
-  color:white;
-  text-decoration:none;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-.logo span{color:var(--red)}
-
-nav{
-  display:flex;
-  gap:20px;
-  flex-wrap:wrap;
+header {
+  padding: 22px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid var(--border);
 }
 
-nav a{
-  color:#ccc;
-  text-decoration:none;
-  font-size:12px;
+.logo {
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 3px;
 }
 
-nav a:hover{color:var(--red)}
-
-.hero{
-  padding:65px 7% 35px;
+.logo span {
+  color: var(--red);
 }
 
-.eyebrow{
-  color:var(--red);
-  letter-spacing:4px;
-  font-size:12px;
-  font-weight:bold;
+nav {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
 }
 
-h1{
-  font-size:clamp(38px,7vw,76px);
-  margin:16px 0;
+nav a {
+  color: #ccc;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
-.hero p{
-  max-width:600px;
-  color:#aaa;
-  line-height:1.7;
+nav a:hover {
+  color: var(--red);
 }
 
-.lab{
-  margin:0 7% 35px;
-  border:1px solid #333;
-  background:linear-gradient(135deg,#171717,#090909);
-  padding:30px;
-  border-radius:8px;
+.hero {
+  padding: 65px 7% 35px;
 }
 
-.lab-label{
-  color:var(--red);
-  font-size:11px;
-  letter-spacing:3px;
+.eyebrow {
+  color: var(--red);
+  font-size: 11px;
+  letter-spacing: 4px;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
-#nowPlaying{
-  font-size:clamp(24px,4vw,40px);
-  font-weight:900;
-  margin:14px 0;
+h1 {
+  font-size: clamp(38px, 7vw, 78px);
+  line-height: .95;
+  font-weight: 900;
+  letter-spacing: -3px;
 }
 
-#status{
-  color:#999;
-  font-size:13px;
-  margin-bottom:22px;
+h1 span {
+  color: var(--red);
 }
 
-.visualizer{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:5px;
-  height:65px;
-  margin-bottom:20px;
+.intro {
+  margin-top: 20px;
+  max-width: 600px;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 14px;
 }
 
-.visualizer span{
-  width:5px;
-  height:10px;
-  background:var(--red);
-  border-radius:4px;
+.lab {
+  margin: 15px 7% 65px;
+  padding: 25px;
+  border: 1px solid var(--border);
+  background: linear-gradient(135deg, #151515, #090909);
 }
 
-.visualizer.playing span{
-  animation:wave .6s ease-in-out infinite alternate;
+.lab-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
 }
 
-.visualizer.playing span:nth-child(2n){animation-delay:.2s}
-.visualizer.playing span:nth-child(3n){animation-delay:.4s}
-.visualizer.playing span:nth-child(4n){animation-delay:.1s}
-
-@keyframes wave{
-  from{height:8px}
-  to{height:55px}
+.lab-top h2 {
+  font-size: 19px;
+  letter-spacing: 2px;
 }
 
-.controls{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
+.status {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
 }
 
-button,select{
-  border:1px solid #444;
-  background:#202020;
-  color:white;
-  padding:13px 18px;
-  border-radius:4px;
-  cursor:pointer;
-  font-weight:bold;
+.status::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--red);
+  margin-right: 8px;
 }
 
-button:hover{border-color:var(--red)}
-
-button.primary{
-  background:var(--red);
-  border-color:var(--red);
+.visualizer {
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  overflow: hidden;
+  margin-bottom: 28px;
 }
 
-button:disabled{
-  opacity:.4;
-  cursor:not-allowed;
+.bar {
+  width: 5px;
+  height: 8px;
+  background: var(--red);
+  border-radius: 5px;
+  transition: height .15s;
 }
 
-.volume{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-top:22px;
-  color:#aaa;
-  font-size:13px;
+.visualizer.playing .bar {
+  animation: pulse .45s ease-in-out infinite alternate;
 }
 
-input[type="range"]{
-  accent-color:var(--red);
-  width:min(220px,55%);
+.bar:nth-child(3n) { animation-delay: .1s; }
+.bar:nth-child(4n) { animation-delay: .2s; }
+.bar:nth-child(5n) { animation-delay: .3s; }
+
+@keyframes pulse {
+  from { height: 7px; }
+  to { height: 45px; }
 }
 
-.section-title{
-  padding:15px 7% 25px;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
 }
 
-.section-title h2{
-  font-size:25px;
-  margin-bottom:8px;
+.car-card {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  overflow: hidden;
+  transition: border-color .2s, transform .2s;
 }
 
-.section-title p{
-  color:#888;
-  font-size:13px;
+.car-card:hover {
+  border-color: var(--red);
+  transform: translateY(-3px);
 }
 
-.cars{
-  padding:0 7% 70px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(245px,1fr));
-  gap:20px;
+.car-image {
+  height: 190px;
+  background: #191919;
+  overflow: hidden;
 }
 
-.car{
-  background:var(--panel);
-  border:1px solid #292929;
-  border-radius:7px;
-  overflow:hidden;
-  transition:.2s;
+.car-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .4s;
 }
 
-.car.active{
-  border-color:var(--red);
+.car-card:hover .car-image img {
+  transform: scale(1.04);
 }
 
-.car img{
-  width:100%;
-  height:175px;
-  object-fit:cover;
-  display:block;
-  background:#222;
+.car-info {
+  padding: 20px;
 }
 
-.car-content{padding:18px}
-
-.car-number{
-  color:var(--red);
-  font-size:10px;
-  letter-spacing:2px;
+.car-number {
+  color: var(--red);
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-bottom: 9px;
+  font-weight: bold;
 }
 
-.car h3{
-  font-size:20px;
-  margin:10px 0 6px;
+.car-info h3 {
+  font-size: 21px;
+  margin-bottom: 8px;
 }
 
-.car p{
-  color:#999;
-  font-size:12px;
-  margin-bottom:16px;
+.car-info p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
 }
 
-.car button{width:100%}
-
-footer{
-  border-top:1px solid #252525;
-  padding:25px 7%;
-  color:#777;
-  font-size:11px;
-  letter-spacing:2px;
+.player {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
 }
 
-@media(max-width:600px){
-  .lab{padding:20px}
+.play-button {
+  width: 46px;
+  height: 46px;
+  border: 0;
+  background: var(--red);
+  color: white;
+  cursor: pointer;
+  font-size: 17px;
+  flex-shrink: 0;
+  transition: background .2s;
+}
+
+.play-button:hover {
+  background: #d90d20;
+}
+
+.play-button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.player-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.player-label {
+  font-size: 10px;
+  color: #ddd;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.progress {
+  height: 3px;
+  background: #333;
+  width: 100%;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: var(--red);
+}
+
+.time {
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 6px;
+}
+
+.volume-box {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.volume-box input {
+  flex: 1;
+  accent-color: var(--red);
+  cursor: pointer;
+}
+
+.message {
+  font-size: 12px;
+  color: #ff6b78;
+  margin-top: 12px;
+  line-height: 1.5;
+  min-height: 16px;
+}
+
+footer {
+  padding: 25px 7%;
+  border-top: 1px solid var(--border);
+  color: #777;
+  font-size: 10px;
+  letter-spacing: 2px;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+footer span {
+  color: var(--red);
+}
+
+@media (max-width: 700px) {
+  header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding-top: 45px;
+  }
+
+  .lab {
+    margin-left: 4%;
+    margin-right: 4%;
+    padding: 15px;
+  }
+
+  h1 {
+    letter-spacing: -1px;
+  }
 }
 </style>
 </head>
@@ -253,8 +354,7 @@ footer{
 <body>
 
 <header>
-  <a href="index.html" class="logo">VELO<span>CITY</span></a>
-
+  <a class="logo" href="index.html">VELO<span>CITY</span></a>
   <nav>
     <a href="index.html">HOME</a>
     <a href="machines.html">THE MACHINES</a>
@@ -264,262 +364,316 @@ footer{
 </header>
 
 <section class="hero">
-  <div class="eyebrow">VELOCITY / AUDIO DIVISION</div>
-  <h1>ENGINE SOUND LAB.</h1>
-  <p>
-    Hear the machines. From naturally aspirated V10s to legendary
-    turbocharged engines, experience the sound of performance.
+  <p class="eyebrow">VELOCITY / AUDIO DIVISION</p>
+  <h1>ENGINE SOUND<br><span>LAB.</span></h1>
+  <p class="intro">
+    Dez máquinas. Dez identidades. Ouve o carácter de cada motor
+    e descobre o som que faz estas máquinas especiais.
   </p>
 </section>
 
 <section class="lab">
-  <div class="lab-label">NOW SELECTED / ENGINE AUDIO</div>
-  <div id="nowPlaying">SELECT A MACHINE</div>
-  <div id="status" aria-live="polite">Ready to start the engines.</div>
-
-  <div class="visualizer" id="visualizer" aria-hidden="true">
-    <span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span>
+  <div class="lab-top">
+    <h2>LIVE AUDIO SYSTEM</h2>
+    <span class="status" id="systemStatus">SYSTEM READY</span>
   </div>
 
-  <div class="controls">
-    <button class="primary" id="playButton" disabled>▶ START ENGINE</button>
-    <button id="stopButton">■ STOP ENGINE</button>
+  <div class="visualizer" id="visualizer"></div>
+
+  <div class="grid" id="carGrid"></div>
+
+  <div class="volume-box">
+    <span>VOLUME</span>
+    <input type="range" id="volume" min="0" max="100" value="75">
+    <span id="volumeValue">75%</span>
   </div>
 
-  <div class="volume">
-    <label for="volume">VOLUME</label>
-    <input id="volume" type="range" min="0" max="1" step="0.05" value="0.7">
-    <span id="volumeValue">70%</span>
-  </div>
+  <p class="message" id="globalMessage" aria-live="polite"></p>
 </section>
 
-<div class="section-title">
-  <h2>CHOOSE YOUR MACHINE</h2>
-  <p>Select a car to load its engine sound.</p>
-</div>
-
-<main class="cars" id="cars"></main>
-
 <footer>
-  VELOCITY — PURE PERFORMANCE / ENGINEERING WITHOUT LIMITS
+  <span>VELOCITY</span>
+  <span>PURE PERFORMANCE / ENGINEERING WITHOUT LIMITS</span>
 </footer>
 
 <script>
-const machines = [
+const cars = [
   {
-    key:"huracan",
-    name:"Lamborghini Huracán STO",
-    engine:"Naturally Aspirated V10",
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini%20Huracan%20STO.jpg",
-    audio:"sounds/huracan-sto.mp3"
+    key: "huracan",
+    name: "Lamborghini Huracán STO",
+    number: "MACHINE / 001",
+    description: "V10 atmosférico. Resposta imediata e carácter de competição.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Huracan_STO.jpg",
+    audio: "sounds/huracan-sto.mp3"
   },
   {
-    key:"chiron",
-    name:"Bugatti Chiron",
-    engine:"Quad-Turbo W16",
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Bugatti_Chiron_2017.jpg",
-    audio:"sounds/bugatti-chiron.mp3"
+    key: "chiron",
+    name: "Bugatti Chiron",
+    number: "MACHINE / 002",
+    description: "W16 quad-turbo. Uma experiência sonora de outro nível.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Bugatti_Chiron_in_Monaco.jpg",
+    audio: "sounds/bugatti-chiron.mp3"
   },
   {
-    key:"gtr",
-    name:"Nissan GT-R R35",
-    engine:"Twin-Turbo V6",
-  image:"https://commons.wikimedia.org/wiki/Special:FilePath/Nissan_GT-R_R35.jpg",
-    audio:"sounds/nissan-gtr-r35.mp3"
+    key: "gtr",
+    name: "Nissan GT-R R35",
+    number: "MACHINE / 003",
+    description: "V6 biturbo e uma identidade sonora inconfundível.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Nissan_GT-R_R35.jpg",
+    audio: "sounds/nissan-gtr-r35.mp3"
   },
   {
-    key:"mclaren",
-    name:"McLaren 720S",
-    engine:"Twin-Turbo V8",
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/2019_Mclaren_720S.jpg",
-    audio:"sounds/mclaren-720s.mp3"
+    key: "mclaren",
+    name: "McLaren 720S",
+    number: "MACHINE / 004",
+    description: "V8 biturbo. Potência e aceleração com ADN britânico.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/McLaren_720S.jpg",
+    audio: "sounds/mclaren-720s.mp3"
   },
   {
-    key:"porsche",
-    name:"Porsche 911 GT3 RS",
-    engine:"Naturally Aspirated Flat-Six",
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/2024_Porsche_911_GT3_RS_992.jpg",
-    audio:"sounds/porsche-911-gt3-rs.mp3"
+    key: "porsche",
+    name: "Porsche 911 GT3 RS",
+    number: "MACHINE / 005",
+    description: "Flat-six de altas rotações, inspirado na competição.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Porsche_911_GT3_RS.jpg",
+    audio: "sounds/porsche-911-gt3-rs.mp3"
   },
   {
-    key:"ferrari-sf90",
-    name:"Ferrari SF90 Stradale",
-    engine:"Twin-Turbo V8 Hybrid",
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/2021_Ferrari_SF90_Stradale.jpg",
-    audio:"sounds/ferrari-sf90.mp3"
+    key: "ferrari-sf90",
+    name: "Ferrari SF90 Stradale",
+    number: "MACHINE / 006",
+    description: "V8 biturbo híbrido. Tecnologia e performance italiana.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Ferrari_SF90_Stradale.jpg",
+    audio: "sounds/ferrari-sf90.mp3"
   },
   {
-    key:"audi-r8-v10",
-    name:"Audi R8 V10 Plus",
-    engine:"Naturally Aspirated V10",
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/AudiR8v10.jpg",
-    audio:"sounds/audi-r8-v10.mp3"
+    key: "audi-r8-v10",
+    name: "Audi R8 V10 Plus",
+    number: "MACHINE / 007",
+    description: "V10 atmosférico com um som agudo e marcante.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Audi_R8_V10_plus.jpg",
+    audio: "sounds/audi-r8-v10.mp3"
   },
   {
-    key:"lamborghini-svj",
-    name:"Lamborghini Aventador SVJ",
-    engine:"Naturally Aspirated V12",
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Aventador_SVJ.jpg",
-    audio:"sounds/aventador-svj.mp3"
+    key: "lamborghini-svj",
+    name: "Lamborghini Aventador SVJ",
+    number: "MACHINE / 008",
+    description: "V12 atmosférico. Uma das vozes mais intensas da Lamborghini.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Aventador_SVJ.jpg",
+    audio: "sounds/aventador-svj.mp3"
   },
   {
-    key:"skyline-r34",
-    name:"Nissan Skyline GT-R R34 — FOR PAUL",
-    engine:"RB26DETT Inline-Six",
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Nissan%20Skyline%20GT-R34.jpg",
-    audio:"sounds/skyline-r34.mp3"
+    key: "skyline-r34",
+    name: "Nissan Skyline GT-R R34",
+    number: "MACHINE / 009 — FOR PAUL",
+    description: "RB26 de seis cilindros em linha. Uma lenda da cultura automóvel.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Nissan_Skyline_R34_GT-R.jpg",
+    audio: "sounds/skyline-r34.mp3"
   },
   {
-    key:"lexus-lfa",
-    name:"Lexus LFA",
-    engine:"Naturally Aspirated V10",
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Lexus_LFA.jpg",
-    audio:"sounds/lexus-lfa-revving.mp3"
+    key: "lexus-lfa",
+    name: "Lexus LFA",
+    number: "MACHINE / 010",
+    description: "V10 atmosférico de altas rotações. Um som verdadeiramente único.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Lexus_LFA.jpg",
+
+    /* CORRIGIDO:
+       O ficheiro está na raiz do repositório,
+       não dentro da pasta sounds. */
+    audio: "lexus-lfa-revving.mp3"
   }
 ];
 
-const carsContainer = document.getElementById("cars");
-const nowPlaying = document.getElementById("nowPlaying");
-const statusText = document.getElementById("status");
+const grid = document.getElementById("carGrid");
+const status = document.getElementById("systemStatus");
+const globalMessage = document.getElementById("globalMessage");
 const visualizer = document.getElementById("visualizer");
-const playButton = document.getElementById("playButton");
-const stopButton = document.getElementById("stopButton");
-const volumeSlider = document.getElementById("volume");
+const volume = document.getElementById("volume");
 const volumeValue = document.getElementById("volumeValue");
 
-let selectedMachine = null;
 let currentAudio = null;
+let currentButton = null;
+let currentProgress = null;
+let currentTime = null;
+let currentTimer = null;
 
-function stopAudio(){
-  if(currentAudio){
+for (let i = 0; i < 45; i++) {
+  const bar = document.createElement("span");
+  bar.className = "bar";
+  visualizer.appendChild(bar);
+}
+
+function formatTime(seconds) {
+  if (!Number.isFinite(seconds)) return "0:00";
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
+  return `${mins}:${secs}`;
+}
+
+function stopCurrentAudio() {
+  if (currentTimer) {
+    clearInterval(currentTimer);
+    currentTimer = null;
+  }
+
+  if (currentAudio) {
     currentAudio.pause();
     currentAudio.currentTime = 0;
   }
 
+  if (currentButton) currentButton.textContent = "▶";
+  if (currentProgress) currentProgress.style.width = "0%";
+  if (currentTime) currentTime.textContent = "0:00";
+
   currentAudio = null;
+  currentButton = null;
+  currentProgress = null;
+  currentTime = null;
+
   visualizer.classList.remove("playing");
-  playButton.textContent = "▶ START ENGINE";
+  status.textContent = "SYSTEM READY";
 }
 
-function selectMachine(machine, card){
-  stopAudio();
+function renderCars() {
+  grid.innerHTML = cars.map((car, index) => `
+    <article class="car-card">
+      <div class="car-image">
+        <img
+          src="${car.image}"
+          alt="${car.name}"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        >
+      </div>
 
-  selectedMachine = machine;
+      <div class="car-info">
+        <div class="car-number">${car.number}</div>
+        <h3>${car.name}</h3>
+        <p>${car.description}</p>
 
-  document.querySelectorAll(".car").forEach(el=>{
-    el.classList.remove("active");
-  });
+        <div class="player">
+          <button
+            class="play-button"
+            type="button"
+            aria-label="Reproduzir ${car.name}"
+            data-index="${index}"
+          >▶</button>
 
-  card.classList.add("active");
-  nowPlaying.textContent = machine.name;
-  statusText.textContent = "Machine selected. Ready to start.";
-  playButton.disabled = false;
-}
+          <div class="player-details">
+            <div class="player-label">ENGINE RECORDING</div>
+            <div class="progress">
+              <div class="progress-fill" id="progress-${index}"></div>
+            </div>
+            <div class="time" id="time-${index}">0:00</div>
+          </div>
+        </div>
 
-function playAudio(){
-  if(!selectedMachine) return;
+        <p class="message" id="message-${index}"></p>
+      </div>
+    </article>
+  `).join("");
 
-  stopAudio();
-
-  const audio = new Audio(selectedMachine.audio);
-  audio.volume = Number(volumeSlider.value);
-  currentAudio = audio;
-
-  statusText.textContent = "Loading engine audio...";
-  playButton.disabled = true;
-
-  audio.addEventListener("canplay",()=>{
-    if(currentAudio !== audio) return;
-
-    statusText.textContent = "ENGINE RUNNING";
-    visualizer.classList.add("playing");
-    playButton.textContent = "↻ RESTART ENGINE";
-    playButton.disabled = false;
-  },{once:true});
-
-  audio.addEventListener("ended",()=>{
-    if(currentAudio !== audio) return;
-
-    visualizer.classList.remove("playing");
-    statusText.textContent = "Engine audio finished.";
-    playButton.textContent = "▶ START ENGINE";
-    currentAudio = null;
-  });
-
-  audio.addEventListener("error",()=>{
-    if(currentAudio !== audio) return;
-
-    visualizer.classList.remove("playing");
-    statusText.textContent =
-      "Audio not found. Check the file in the sounds folder.";
-    playButton.textContent = "▶ RETRY ENGINE";
-    playButton.disabled = false;
-    currentAudio = null;
-  },{once:true});
-
-  audio.play().catch(()=>{
-    if(currentAudio !== audio) return;
-
-    statusText.textContent =
-      "Could not play audio. Check the file path and format.";
-    visualizer.classList.remove("playing");
-    playButton.disabled = false;
-    currentAudio = null;
+  document.querySelectorAll(".play-button").forEach(button => {
+    button.addEventListener("click", () => {
+      playCar(Number(button.dataset.index), button);
+    });
   });
 }
 
-machines.forEach(machine=>{
-  const card = document.createElement("article");
-  card.className = "car";
+function playCar(index, button) {
+  const car = cars[index];
+  const message = document.getElementById(`message-${index}`);
 
-  const img = document.createElement("img");
-  img.src = machine.image;
-  img.alt = machine.name;
-  img.loading = "lazy";
-
-  img.onerror = function(){
-    this.onerror = null;
-    this.src =
-      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=80";
-  };
-
-  const content = document.createElement("div");
-  content.className = "car-content";
-  content.innerHTML = `
-    <div class="car-number">ENGINE / ${String(machines.indexOf(machine)+1).padStart(3,"0")}</div>
-    <h3>${machine.name}</h3>
-    <p>${machine.engine}</p>
-    <button type="button">SELECT MACHINE ↗</button>
-  `;
-
-  content.querySelector("button").addEventListener("click",()=>{
-    selectMachine(machine,card);
-  });
-
-  card.append(img,content);
-  carsContainer.appendChild(card);
-});
-
-playButton.addEventListener("click",playAudio);
-stopButton.addEventListener("click",()=>{
-  stopAudio();
-  statusText.textContent = "Engine stopped.";
-});
-
-volumeSlider.addEventListener("input",()=>{
-  const volume = Number(volumeSlider.value);
-
-  if(currentAudio){
-    currentAudio.volume = volume;
+  if (currentAudio && currentButton === button) {
+    stopCurrentAudio();
+    globalMessage.textContent = "Reprodução parada.";
+    return;
   }
 
-  volumeValue.textContent = Math.round(volume*100)+"%";
+  stopCurrentAudio();
+  document.querySelectorAll(".message").forEach(el => {
+    if (el.id.startsWith("message-")) el.textContent = "";
+  });
+
+  message.textContent = "";
+  globalMessage.textContent = "";
+  status.textContent = "LOADING AUDIO...";
+
+  const audio = new Audio(car.audio);
+  audio.volume = Number(volume.value) / 100;
+  audio.preload = "metadata";
+
+  currentAudio = audio;
+  currentButton = button;
+  currentProgress = document.getElementById(`progress-${index}`);
+  currentTime = document.getElementById(`time-${index}`);
+
+  button.textContent = "Ⅱ";
+
+  audio.addEventListener("loadedmetadata", () => {
+    if (currentAudio !== audio) return;
+    currentTime.textContent = `0:00 / ${formatTime(audio.duration)}`;
+  });
+
+  audio.addEventListener("timeupdate", () => {
+    if (currentAudio !== audio) return;
+
+    const duration = audio.duration || 0;
+    const percentage = duration ? (audio.currentTime / duration) * 100 : 0;
+
+    currentProgress.style.width = `${percentage}%`;
+    currentTime.textContent =
+      `${formatTime(audio.currentTime)} / ${formatTime(duration)}`;
+  });
+
+  audio.addEventListener("ended", () => {
+    if (currentAudio !== audio) return;
+    stopCurrentAudio();
+    status.textContent = "PLAYBACK COMPLETE";
+  });
+
+  audio.addEventListener("error", () => {
+    if (currentAudio !== audio) return;
+
+    stopCurrentAudio();
+    status.textContent = "AUDIO NOT FOUND";
+    message.textContent =
+      `Não foi possível carregar "${car.audio}". Confirma o nome, a extensão e a localização do ficheiro no GitHub.`;
+  });
+
+  audio.play()
+    .then(() => {
+      if (currentAudio !== audio) return;
+      status.textContent = "ENGINE RUNNING";
+      visualizer.classList.add("playing");
+    })
+    .catch(() => {
+      if (currentAudio !== audio) return;
+
+      stopCurrentAudio();
+      status.textContent = "PLAYBACK ERROR";
+      message.textContent =
+        `Não foi possível reproduzir o áudio. Verifica se o ficheiro existe: ${car.audio}`;
+    });
+
+  currentTimer = setInterval(() => {
+    if (!currentAudio || currentAudio !== audio) {
+      clearInterval(currentTimer);
+      currentTimer = null;
+    }
+  }, 1000);
+}
+
+volume.addEventListener("input", () => {
+  const value = Number(volume.value);
+  volumeValue.textContent = `${value}%`;
+
+  if (currentAudio) {
+    currentAudio.volume = value / 100;
+  }
 });
+
+renderCars();
 </script>
 
 </body>
