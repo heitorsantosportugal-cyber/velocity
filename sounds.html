@@ -3,270 +3,50 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080808">
-<meta name="description" content="VELOCITY Engine Sound Lab — experiência sonora de supercarros.">
 <title>Engine Sound Lab | VELOCITY</title>
-
 <style>
-:root {
-  --red: #ff2020;
-  --bg: #080808;
-  --panel: #111111;
-  --muted: #999;
-  --line: #292929;
-}
-
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-a { color: inherit; text-decoration: none; }
-
-header {
-  min-height: 76px;
-  padding: 20px 7%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  border-bottom: 1px solid var(--line);
-}
-
-.logo {
-  font-size: 23px;
-  font-weight: 900;
-  letter-spacing: 2px;
-}
-
-.logo span { color: var(--red); }
-
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  font-size: 11px;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-nav a:hover { color: var(--red); }
-
-.hero {
-  padding: 75px 7% 40px;
-  background:
-    radial-gradient(ellipse at 80% 30%, #4b1010 0%, transparent 38%),
-    linear-gradient(120deg, #101010, #080808 70%);
-}
-
-.eyebrow {
-  color: var(--red);
-  letter-spacing: 4px;
-  font-size: 11px;
-  font-weight: bold;
-}
-
-h1 {
-  font-size: clamp(42px, 8vw, 90px);
-  line-height: .95;
-  margin: 18px 0;
-  font-weight: 900;
-  letter-spacing: -3px;
-}
-
-h1 span { color: var(--red); }
-
-.hero p {
-  max-width: 550px;
-  color: #aaa;
-  line-height: 1.8;
-}
-
-main {
-  max-width: 1100px;
-  padding: 35px 22px 80px;
-  margin: auto;
-}
-
-.lab {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-.panel {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 28px;
-  min-width: 0;
-}
-
-.panel h2 { font-size: 19px; margin-top: 0; }
-
-.label {
-  display: block;
-  margin: 22px 0 10px;
-  color: #aaa;
-  font-size: 11px;
-  letter-spacing: 2px;
-  font-weight: bold;
-}
-
-select, input[type="range"] { width: 100%; }
-
-select {
-  background: #080808;
-  color: white;
-  padding: 15px;
-  border: 1px solid #393939;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-.display {
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background:
-    radial-gradient(circle, #3b1010 0%, #151010 35%, #090909 75%);
-  border: 1px solid #351616;
-  border-radius: 9px;
-  margin-bottom: 20px;
-  padding: 20px;
-}
-
-.engine-icon { font-size: 45px; margin-bottom: 12px; }
-
-#displayName {
-  font-size: 22px;
-  font-weight: 900;
-}
-
-#status {
-  margin-top: 10px;
-  color: #aaa;
-  font-size: 11px;
-  letter-spacing: 2px;
-}
-
-.buttons {
-  display: flex;
-  gap: 12px;
-  margin-top: 22px;
-}
-
-button {
-  flex: 1;
-  padding: 15px 10px;
-  border: 1px solid var(--red);
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  transition: .2s;
-}
-
-button:disabled {
-  opacity: .35;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.primary { color: white; background: var(--red); }
-.primary:hover:not(:disabled) { background: #d60000; transform: translateY(-2px); }
-.secondary { background: transparent; color: white; }
-.secondary:hover:not(:disabled) { background: #252525; }
-
-input[type="range"] { accent-color: var(--red); }
-
-.volume-line {
-  display: flex;
-  justify-content: space-between;
-  color: #aaa;
-  font-size: 12px;
-  margin-top: 10px;
-}
-
-.note {
-  color: #999;
-  line-height: 1.7;
-  font-size: 13px;
-}
-
-.status-message {
-  margin-top: 18px;
-  min-height: 40px;
-  padding: 12px;
-  border-left: 3px solid var(--red);
-  background: #191010;
-  color: #ddd;
-  font-size: 12px;
-  line-height: 1.6;
-  overflow-wrap: anywhere;
-}
-
-.sound-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 25px;
-}
-
-.sound-card {
-  background: #101010;
-  border: 1px solid var(--line);
-  padding: 17px;
-  border-radius: 8px;
-  min-width: 0;
-}
-
-.sound-card strong { display: block; }
-
-.sound-card span {
-  display: block;
-  color: #999;
-  font-size: 11px;
-  margin-top: 8px;
-  line-height: 1.6;
-  overflow-wrap: anywhere;
-}
-
-.sound-card.available { border-color: #333; }
-.sound-card.missing { border-color: #442020; }
-
-footer {
-  text-align: center;
-  color: #666;
-  border-top: 1px solid var(--line);
-  padding: 25px;
-  font-size: 11px;
-  letter-spacing: 2px;
-}
-
-@media (max-width: 700px) {
-  header { align-items: flex-start; flex-direction: column; }
-  .lab { grid-template-columns: 1fr; }
-  .sound-list { grid-template-columns: 1fr; }
-  .hero { padding-top: 55px; }
-  .panel { padding: 20px; }
-  .buttons { flex-wrap: wrap; }
-  h1 { letter-spacing: -2px; }
-}
+:root{--red:#ff2638;--bg:#080808;--panel:#111;--muted:#999;--line:#292929}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:#f5f5f5;font-family:Arial,Helvetica,sans-serif}
+a{color:inherit;text-decoration:none}
+header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.logo{font-size:25px;font-weight:900;letter-spacing:3px}.logo span,h1 span{color:var(--red)}
+nav{display:flex;gap:18px;flex-wrap:wrap}nav a{font-size:11px;letter-spacing:1px;color:#ccc}nav a:hover{color:var(--red)}
+.hero{padding:60px 7% 35px}.eyebrow{color:var(--red);font-size:11px;letter-spacing:4px;font-weight:bold;margin-bottom:15px}
+h1{font-size:clamp(38px,7vw,76px);line-height:.98;letter-spacing:-3px;font-weight:900}
+.intro{margin-top:20px;max-width:650px;color:var(--muted);line-height:1.7;font-size:14px}
+main{padding:0 7% 60px}
+.lab{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.panel{padding:25px;background:linear-gradient(135deg,#151515,#090909);border:1px solid var(--line);min-width:0}
+.panel h2{font-size:17px;letter-spacing:1px}
+.label{display:block;margin:22px 0 10px;color:#aaa;font-size:11px;letter-spacing:2px;font-weight:bold}
+select,input[type=range]{width:100%}
+select{background:#080808;color:white;padding:14px;border:1px solid #393939;font-size:14px}
+input[type=range]{accent-color:var(--red)}
+.volume-line{display:flex;justify-content:space-between;color:#aaa;font-size:12px;margin-top:10px}
+.note{color:#999;line-height:1.7;font-size:13px;margin-top:20px}
+.display{min-height:170px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:radial-gradient(circle,#3b1010,#090909 75%);border:1px solid #351616;margin:20px 0;padding:20px;overflow-wrap:anywhere}
+.engine-icon{font-size:42px;margin-bottom:12px}#displayName{font-size:21px;font-weight:900}#status{margin-top:10px;color:#aaa;font-size:11px;letter-spacing:2px}
+.buttons{display:flex;gap:12px;margin-top:15px}
+button{flex:1;padding:15px 10px;border:1px solid var(--red);cursor:pointer;font-size:11px;font-weight:900;letter-spacing:1px}
+.primary{color:white;background:var(--red)}.secondary{background:transparent;color:white}
+button:disabled{opacity:.4;cursor:not-allowed}
+.message{margin-top:18px;padding:12px;border-left:3px solid var(--red);background:#191010;color:#ddd;font-size:12px;line-height:1.6;overflow-wrap:anywhere;min-height:42px}
+.collection{margin-top:45px}.collection h2{font-size:30px;margin-bottom:12px}
+.sound-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:25px}
+.sound-card{background:#101010;border:1px solid var(--line);overflow:hidden;min-width:0}
+.sound-card.missing{border-color:#442020}
+.car-image{height:180px;background:#191919}
+.car-image img{width:100%;height:100%;object-fit:cover;display:block}
+.car-info{padding:17px}.car-info strong{display:block;font-size:15px}
+.car-info span{display:block;color:#999;font-size:11px;margin-top:8px;line-height:1.6;overflow-wrap:anywhere}
+footer{text-align:center;color:#666;border-top:1px solid var(--line);padding:25px;font-size:11px;letter-spacing:2px}
+@media(max-width:700px){header{align-items:flex-start;flex-direction:column}.lab,.sound-list{grid-template-columns:1fr}.hero{padding-top:45px}main{padding-left:5%;padding-right:5%}.panel{padding:20px}h1{letter-spacing:-2px}}
 </style>
 </head>
-
 <body>
-
 <header>
   <a class="logo" href="index.html">VELO<span>CITY</span></a>
   <nav>
@@ -280,18 +60,13 @@ footer {
 <section class="hero">
   <div class="eyebrow">VELOCITY AUDIO DIVISION / 001</div>
   <h1>ENGINE<br><span>SOUND LAB.</span></h1>
-  <p>
-    Hear the machines. Experience the engineering.
-    Choose your car and explore its engine sound.
-  </p>
+  <p class="intro">Hear the machines. Experience the engineering. Choose a car and start its engine.</p>
 </section>
 
 <main>
   <div class="lab">
-
     <section class="panel">
       <h2>01 / SELECT YOUR MACHINE</h2>
-
       <label class="label" for="carSelect">CHOOSE A CAR</label>
       <select id="carSelect">
         <option value="huracan">Lamborghini Huracán STO — V10</option>
@@ -300,56 +75,40 @@ footer {
         <option value="mclaren">McLaren 720S — V8</option>
         <option value="porsche">Porsche 911 GT3 RS — Flat-six</option>
         <option value="ferrari-458">Ferrari 458 Italia — V8</option>
-        <option value="koenigsegg-jesko">Koenigsegg Jesko — V8</option>
+        <option value="dodge-demon">Dodge Challenger SRT Demon — V8</option>
         <option value="lamborghini-svj">Lamborghini Aventador SVJ — V12</option>
         <option value="mercedes-amg-one">Mercedes-AMG ONE — V6 Hybrid</option>
         <option value="mclaren-p1">McLaren P1 — V8 Hybrid</option>
+        <option value="lexus-lfa">Lexus LFA — V10</option>
+        <option value="skyline-r34">Nissan Skyline GT-R R34 — RB26</option>
       </select>
 
       <label class="label" for="volume">AUDIO VOLUME</label>
       <input id="volume" type="range" min="0" max="100" value="70">
-
-      <div class="volume-line">
-        <span>VOLUME</span>
-        <span id="volumeValue">70%</span>
-      </div>
-
-      <p class="note">
-        For the best experience, use headphones.
-        Audio playback begins when you press START ENGINE.
-      </p>
+      <div class="volume-line"><span>VOLUME</span><span id="volumeValue">70%</span></div>
+      <p class="note">Audio playback begins when you press START ENGINE. Audio files must be uploaded to the root of the VELOCITY repository.</p>
     </section>
 
     <section class="panel">
       <h2>02 / LIVE AUDIO SYSTEM</h2>
-
       <div class="display">
         <div class="engine-icon">🏎️</div>
         <div id="displayName">LAMBORGHINI HURACÁN STO</div>
         <div id="status">SYSTEM STANDBY</div>
       </div>
-
       <div class="buttons">
         <button class="primary" id="playBtn">▶ START ENGINE</button>
         <button class="secondary" id="stopBtn">■ STOP</button>
       </div>
-
-      <div class="status-message" id="message" role="status" aria-live="polite">
-        Select a machine and press START ENGINE.
-      </div>
-
+      <div class="message" id="message" role="status" aria-live="polite">Select a machine and press START ENGINE.</div>
       <audio id="engineAudio" preload="none"></audio>
     </section>
-
   </div>
 
-  <section style="margin-top:45px">
+  <section class="collection">
     <div class="eyebrow">THE SOUND COLLECTION</div>
-    <h2 style="font-size:30px">TEN MACHINES. TEN CHARACTERS.</h2>
-    <p class="note">
-      Audio files are loaded from the root of the VELOCITY repository.
-      Cars without an uploaded recording will be marked unavailable.
-    </p>
+    <h2>THE MACHINES.</h2>
+    <p class="note">If an image fails to load, the page tries a backup image. If an audio file is missing, the player shows its status.</p>
     <div class="sound-list" id="soundList"></div>
   </section>
 </main>
@@ -359,81 +118,61 @@ footer {
 <script>
 "use strict";
 
-/*
-  IMPORTANT:
-  These paths point to files in the ROOT of the GitHub repository.
-  The Ferrari 458 file must be named exactly:
-  ferrari-458.mp3
-
-  A null file means that the sound has not been connected yet.
-*/
-
-const carData = {
+const cars = {
   "huracan": {
-    name: "LAMBORGHINI HURACÁN STO",
-    engine: "5.2L V10",
-    file: null
+    name:"LAMBORGHINI HURACÁN STO", engine:"5.2L V10", file:null,
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Huracan_STO.jpg"
   },
-
   "chiron": {
-    name: "BUGATTI CHIRON",
-    engine: "8.0L W16",
-    file: "./bugatti-chiron-revving.mp3"
+    name:"BUGATTI CHIRON", engine:"8.0L W16", file:"./bugatti-chiron-revving.mp3",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Bugatti_Chiron_2017.jpg"
   },
-
   "gtr": {
-    name: "NISSAN GT-R R35",
-    engine: "3.8L V6",
-    file: null
+    name:"NISSAN GT-R R35", engine:"3.8L V6", file:null,
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Nissan_GT-R_R35.jpg"
   },
-
   "mclaren": {
-    name: "MCLAREN 720S",
-    engine: "4.0L V8",
-    file: null
+    name:"MCLAREN 720S", engine:"4.0L V8", file:null,
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/2019_Mclaren_720S.jpg"
   },
-
   "porsche": {
-    name: "PORSCHE 911 GT3 RS",
-    engine: "4.0L FLAT-SIX",
-    file: "./u_logan-porsche-911-sound-452471.mp3"
+    name:"PORSCHE 911 GT3 RS", engine:"4.0L FLAT-SIX", file:"./u_logan-porsche-911-sound-452471.mp3",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/2024_Porsche_911_GT3_RS_992.jpg"
   },
-
   "ferrari-458": {
-    name: "FERRARI 458 ITALIA",
-    engine: "4.5L V8",
-    file: "./ferrari-458.mp3"
+    name:"FERRARI 458 ITALIA", engine:"4.5L V8", file:"./ferrari-458.mp3",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Ferrari_458_Italia.jpg"
   },
-
-  "koenigsegg-jesko": {
-    name: "KOENIGSEGG JESKO",
-    engine: "5.0L V8",
-    file: null
+  "dodge-demon": {
+    name:"DODGE CHALLENGER SRT DEMON", engine:"6.2L SUPERCHARGED V8", file:"./dodge-demon.mp3",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Dodge_Challenger_SRT_Demon.jpg"
   },
-
   "lamborghini-svj": {
-    name: "LAMBORGHINI AVENTADOR SVJ",
-    engine: "6.5L V12",
-    file: "./aventador-svj.mp3"
+    name:"LAMBORGHINI AVENTADOR SVJ", engine:"6.5L V12", file:"./aventador-svj.mp3",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Aventador_SVJ.jpg"
   },
-
   "mercedes-amg-one": {
-    name: "MERCEDES-AMG ONE",
-    engine: "V6 HYBRID",
-    file: null
+    name:"MERCEDES-AMG ONE", engine:"V6 HYBRID", file:null,
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Mercedes-AMG_One.jpg"
   },
-
   "mclaren-p1": {
-    name: "MCLAREN P1",
-    engine: "V8 HYBRID",
-    file: "./mclaren-p1.mp3"
+    name:"MCLAREN P1", engine:"3.8L V8 HYBRID", file:"./mclaren-p1.mp3",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/McLaren_P1.jpg"
+  },
+  "lexus-lfa": {
+    name:"LEXUS LFA", engine:"4.8L V10", file:"./lexus-lfa-revving.mp3",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Lexus_LFA.jpg"
+  },
+  "skyline-r34": {
+    name:"NISSAN SKYLINE GT-R R34", engine:"RB26 INLINE-SIX", file:"./nissan-skyline-gt-r-revving.mp3",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Nissan_Skyline_GT-R_R34.jpg"
   }
 };
 
 const select = document.getElementById("carSelect");
 const audio = document.getElementById("engineAudio");
 const displayName = document.getElementById("displayName");
-const status = document.getElementById("status");
+const statusText = document.getElementById("status");
 const message = document.getElementById("message");
 const volume = document.getElementById("volume");
 const volumeValue = document.getElementById("volumeValue");
@@ -443,114 +182,114 @@ const soundList = document.getElementById("soundList");
 
 function stopAudio() {
   audio.pause();
-
-  try {
-    audio.currentTime = 0;
-  } catch (_) {
-    // Nothing to reset if no audio has been loaded.
-  }
+  try { audio.currentTime = 0; } catch (_) {}
 }
 
 function chooseCar() {
   stopAudio();
-
-  const car = carData[select.value];
+  const car = cars[select.value];
   if (!car) return;
 
   displayName.textContent = car.name;
-  status.textContent = car.file ? "SYSTEM STANDBY" : "AUDIO NOT ADDED";
+  statusText.textContent = car.file ? "SYSTEM STANDBY" : "AUDIO NOT ADDED";
   playBtn.disabled = !car.file;
 
   if (car.file) {
     audio.src = car.file;
     audio.load();
-    message.textContent =
-      "Selected: " + car.name + ". Press START ENGINE.";
+    message.textContent = "Selected: " + car.name + ". Press START ENGINE.";
   } else {
     audio.removeAttribute("src");
     audio.load();
-    message.textContent =
-      "The recording for " + car.name +
-      " has not been added to the repository yet.";
+    message.textContent = "No audio file has been connected for " + car.name + " yet.";
   }
 }
 
-function renderSoundList() {
+function renderCars() {
   soundList.replaceChildren();
 
-  Object.values(carData).forEach(car => {
-    const card = document.createElement("div");
+  Object.entries(cars).forEach(([key, car]) => {
+    const card = document.createElement("article");
     card.className = "sound-card " + (car.file ? "available" : "missing");
+
+    const imageBox = document.createElement("div");
+    imageBox.className = "car-image";
+
+    const img = document.createElement("img");
+    img.src = car.image;
+    img.alt = car.name;
+    img.loading = "lazy";
+    img.onerror = function() {
+      this.onerror = null;
+      this.src = "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80";
+      this.alt = car.name + " — replacement image";
+    };
+
+    const info = document.createElement("div");
+    info.className = "car-info";
 
     const name = document.createElement("strong");
     name.textContent = car.name;
 
     const details = document.createElement("span");
-    details.textContent = car.engine + " · " +
-      (car.file ? car.file : "AUDIO NOT ADDED YET");
+    details.textContent = car.engine + " · " + (car.file ? "Audio: " + car.file : "Audio not added yet");
 
-    card.append(name, details);
+    info.append(name, details);
+    imageBox.appendChild(img);
+    card.append(imageBox, info);
+    card.addEventListener("click", () => {
+      select.value = key;
+      chooseCar();
+      window.scrollTo({top:0,behavior:"smooth"});
+    });
+    card.style.cursor = "pointer";
     soundList.appendChild(card);
   });
 }
 
 select.addEventListener("change", chooseCar);
-
 volume.addEventListener("input", () => {
   audio.volume = Number(volume.value) / 100;
   volumeValue.textContent = volume.value + "%";
 });
 
 playBtn.addEventListener("click", async () => {
-  const car = carData[select.value];
-
-  if (!car || !car.file) {
-    status.textContent = "AUDIO NOT ADDED";
-    message.textContent =
-      "This car does not have an audio file connected yet.";
-    return;
-  }
+  const car = cars[select.value];
+  if (!car || !car.file) return;
 
   audio.volume = Number(volume.value) / 100;
-
   try {
     await audio.play();
-    status.textContent = "ENGINE RUNNING";
+    statusText.textContent = "ENGINE RUNNING";
     message.textContent = "Audio playing: " + car.name;
   } catch (error) {
-    status.textContent = "AUDIO UNAVAILABLE";
-    message.textContent =
-      "The audio could not be played. Check that the file exists " +
-      "in the repository root with this exact name: " + car.file;
+    statusText.textContent = "AUDIO UNAVAILABLE";
+    message.textContent = "Could not play " + car.file + ". Check the exact filename in GitHub.";
   }
 });
 
 stopBtn.addEventListener("click", () => {
   stopAudio();
-  status.textContent = "SYSTEM STANDBY";
+  statusText.textContent = "SYSTEM STANDBY";
   message.textContent = "Playback stopped.";
 });
 
 audio.addEventListener("ended", () => {
-  status.textContent = "SYSTEM STANDBY";
+  statusText.textContent = "SYSTEM STANDBY";
   message.textContent = "Playback finished.";
 });
 
 audio.addEventListener("error", () => {
-  const car = carData[select.value];
-
+  const car = cars[select.value];
   if (car && car.file) {
-    status.textContent = "AUDIO UNAVAILABLE";
-    message.textContent =
-      "Could not load " + car.file +
-      ". Check the exact filename and its location on GitHub.";
+    statusText.textContent = "AUDIO UNAVAILABLE";
+    message.textContent = "Could not load " + car.file + ". Check the exact filename and location.";
   }
 });
 
 audio.volume = 0.7;
-renderSoundList();
+renderCars();
 chooseCar();
 </script>
-
 </body>
 </html>
