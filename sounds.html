@@ -6,15 +6,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080808">
 <title>Engine Sound Lab | VELOCITY</title>
+
 <style>
 :root{--red:#ff2638;--bg:#080808;--panel:#111;--muted:#999;--line:#292929}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:#f5f5f5;font-family:Arial,Helvetica,sans-serif}
 a{color:inherit;text-decoration:none}
 header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
-.logo{font-size:25px;font-weight:900;letter-spacing:3px}.logo span,h1 span{color:var(--red)}
-nav{display:flex;gap:18px;flex-wrap:wrap}nav a{font-size:11px;letter-spacing:1px;color:#ccc}nav a:hover{color:var(--red)}
-.hero{padding:60px 7% 35px}.eyebrow{color:var(--red);font-size:11px;letter-spacing:4px;font-weight:bold;margin-bottom:15px}
+.logo{font-size:25px;font-weight:900;letter-spacing:3px}
+.logo span,h1 span{color:var(--red)}
+nav{display:flex;gap:18px;flex-wrap:wrap}
+nav a{font-size:11px;letter-spacing:1px;color:#ccc}
+nav a:hover{color:var(--red)}
+.hero{padding:60px 7% 35px}
+.eyebrow{color:var(--red);font-size:11px;letter-spacing:4px;font-weight:bold;margin-bottom:15px}
 h1{font-size:clamp(38px,7vw,76px);line-height:.98;letter-spacing:-3px;font-weight:900}
 .intro{margin-top:20px;max-width:650px;color:var(--muted);line-height:1.7;font-size:14px}
 main{padding:0 7% 60px}
@@ -28,24 +33,37 @@ input[type=range]{accent-color:var(--red)}
 .volume-line{display:flex;justify-content:space-between;color:#aaa;font-size:12px;margin-top:10px}
 .note{color:#999;line-height:1.7;font-size:13px;margin-top:20px}
 .display{min-height:170px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:radial-gradient(circle,#3b1010,#090909 75%);border:1px solid #351616;margin:20px 0;padding:20px;overflow-wrap:anywhere}
-.engine-icon{font-size:42px;margin-bottom:12px}#displayName{font-size:21px;font-weight:900}#status{margin-top:10px;color:#aaa;font-size:11px;letter-spacing:2px}
+.engine-icon{font-size:42px;margin-bottom:12px}
+#displayName{font-size:21px;font-weight:900}
+#status{margin-top:10px;color:#aaa;font-size:11px;letter-spacing:2px}
 .buttons{display:flex;gap:12px;margin-top:15px}
 button{flex:1;padding:15px 10px;border:1px solid var(--red);cursor:pointer;font-size:11px;font-weight:900;letter-spacing:1px}
-.primary{color:white;background:var(--red)}.secondary{background:transparent;color:white}
+.primary{color:white;background:var(--red)}
+.secondary{background:transparent;color:white}
 button:disabled{opacity:.4;cursor:not-allowed}
 .message{margin-top:18px;padding:12px;border-left:3px solid var(--red);background:#191010;color:#ddd;font-size:12px;line-height:1.6;overflow-wrap:anywhere;min-height:42px}
-.collection{margin-top:45px}.collection h2{font-size:30px;margin-bottom:12px}
+.collection{margin-top:45px}
+.collection h2{font-size:30px;margin-bottom:12px}
 .sound-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:25px}
 .sound-card{background:#101010;border:1px solid var(--line);overflow:hidden;min-width:0}
 .sound-card.missing{border-color:#442020}
 .car-image{height:180px;background:#191919}
 .car-image img{width:100%;height:100%;object-fit:cover;display:block}
-.car-info{padding:17px}.car-info strong{display:block;font-size:15px}
+.car-info{padding:17px}
+.car-info strong{display:block;font-size:15px}
 .car-info span{display:block;color:#999;font-size:11px;margin-top:8px;line-height:1.6;overflow-wrap:anywhere}
 footer{text-align:center;color:#666;border-top:1px solid var(--line);padding:25px;font-size:11px;letter-spacing:2px}
-@media(max-width:700px){header{align-items:flex-start;flex-direction:column}.lab,.sound-list{grid-template-columns:1fr}.hero{padding-top:45px}main{padding-left:5%;padding-right:5%}.panel{padding:20px}h1{letter-spacing:-2px}}
+@media(max-width:700px){
+header{align-items:flex-start;flex-direction:column}
+.lab,.sound-list{grid-template-columns:1fr}
+.hero{padding-top:45px}
+main{padding-left:5%;padding-right:5%}
+.panel{padding:20px}
+h1{letter-spacing:-2px}
+}
 </style>
 </head>
+
 <body>
 <header>
   <a class="logo" href="index.html">VELO<span>CITY</span></a>
@@ -67,9 +85,10 @@ footer{text-align:center;color:#666;border-top:1px solid var(--line);padding:25p
   <div class="lab">
     <section class="panel">
       <h2>01 / SELECT YOUR MACHINE</h2>
+
       <label class="label" for="carSelect">CHOOSE A CAR</label>
       <select id="carSelect">
-       <option value="ferrari-f12tdf">Ferrari F12tdf</option>
+        <option value="ferrari-f12tdf">Ferrari F12tdf</option>
         <option value="chiron">Bugatti Chiron — W16</option>
         <option value="gtr">Nissan GT-R R35 — V6</option>
         <option value="mclaren">McLaren 720S — V8</option>
@@ -85,21 +104,28 @@ footer{text-align:center;color:#666;border-top:1px solid var(--line);padding:25p
 
       <label class="label" for="volume">AUDIO VOLUME</label>
       <input id="volume" type="range" min="0" max="100" value="70">
-      <div class="volume-line"><span>VOLUME</span><span id="volumeValue">70%</span></div>
+      <div class="volume-line">
+        <span>VOLUME</span>
+        <span id="volumeValue">70%</span>
+      </div>
+
       <p class="note">Audio playback begins when you press START ENGINE. Audio files must be uploaded to the root of the VELOCITY repository.</p>
     </section>
 
     <section class="panel">
       <h2>02 / LIVE AUDIO SYSTEM</h2>
+
       <div class="display">
         <div class="engine-icon">🏎️</div>
-        <div id="displayName">LAMBORGHINI HURACÁN STO</div>
+        <div id="displayName">FERRARI F12tdf</div>
         <div id="status">SYSTEM STANDBY</div>
       </div>
+
       <div class="buttons">
         <button class="primary" id="playBtn">▶ START ENGINE</button>
         <button class="secondary" id="stopBtn">■ STOP</button>
       </div>
+
       <div class="message" id="message" role="status" aria-live="polite">Select a machine and press START ENGINE.</div>
       <audio id="engineAudio" preload="none"></audio>
     </section>
@@ -119,55 +145,88 @@ footer{text-align:center;color:#666;border-top:1px solid var(--line);padding:25p
 "use strict";
 
 const cars = {
- "ferrari-f12tdf": {
-  name: "FERRARI F12tdf",
-  engine: "6.3L NATURALLY ASPIRATED V12",
-  file: "./Ferrari-F12.mp3",
-  image: "https://commons.wikimedia.org/wiki/Special:FilePath/Ferrari_F12tdf.jpg"
-},
+  "ferrari-f12tdf": {
+    name: "FERRARI F12tdf",
+    engine: "6.3L NATURALLY ASPIRATED V12",
+    file: "./Ferrari-F12.opus",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Ferrari_F12tdf.jpg"
+  },
+
   "chiron": {
-    name:"BUGATTI CHIRON", engine:"8.0L W16", file:"./bugatti-chiron-revving.mp3",
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Bugatti_Chiron_2017.jpg"
+    name: "BUGATTI CHIRON",
+    engine: "8.0L W16",
+    file: "./bugatti-chiron-revving.mp3",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Bugatti_Chiron_2017.jpg"
   },
+
   "gtr": {
-    name:"NISSAN GT-R R35", engine:"3.8L V6", file:null,
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Nissan_GT-R_R35.jpg"
+    name: "NISSAN GT-R R35",
+    engine: "3.8L V6",
+    file: null,
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Nissan_GT-R_R35.jpg"
   },
+
   "mclaren": {
-    name:"MCLAREN 720S", engine:"4.0L V8", file:null,
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/2019_Mclaren_720S.jpg"
+    name: "MCLAREN 720S",
+    engine: "4.0L V8",
+    file: null,
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/2019_Mclaren_720S.jpg"
   },
+
   "porsche": {
-    name:"PORSCHE 911 GT3 RS", engine:"4.0L FLAT-SIX", file:"./u_logan-porsche-911-sound-452471.mp3",
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/2024_Porsche_911_GT3_RS_992.jpg"
+    name: "PORSCHE 911 GT3 RS",
+    engine: "4.0L FLAT-SIX",
+    file: "./u_logan-porsche-911-sound-452471.mp3",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/2024_Porsche_911_GT3_RS_992.jpg"
   },
+
   "ferrari-458": {
-    name:"FERRARI 458 ITALIA", engine:"4.5L V8", file:"./ferrari-458.mp3",
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Ferrari_458_Italia.jpg"
+    name: "FERRARI 458 ITALIA",
+    engine: "4.5L V8",
+    file: "./ferrari-458.mp3",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Ferrari_458_Italia.jpg"
   },
+
   "dodge-demon": {
-    name:"DODGE CHALLENGER SRT DEMON", engine:"6.2L SUPERCHARGED V8", file:"./dodge-demon.mp3",
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Dodge_Challenger_SRT_Demon.jpg"
+    name: "DODGE CHALLENGER SRT DEMON",
+    engine: "6.2L SUPERCHARGED V8",
+    file: "./dodge-demon.mp3",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Dodge_Challenger_SRT_Demon.jpg"
   },
+
   "lamborghini-svj": {
-    name:"LAMBORGHINI AVENTADOR SVJ", engine:"6.5L V12", file:"./aventador-svj.mp3",
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Aventador_SVJ.jpg"
+    name: "LAMBORGHINI AVENTADOR SVJ",
+    engine: "6.5L V12",
+    file: "./aventador-svj.mp3",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Lamborghini_Aventador_SVJ.jpg"
   },
+
   "mercedes-amg-one": {
-    name:"MERCEDES-AMG ONE", engine:"V6 HYBRID", file:null,
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Mercedes-AMG_One.jpg"
+    name: "MERCEDES-AMG ONE",
+    engine: "V6 HYBRID",
+    file: null,
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Mercedes-AMG_One.jpg"
   },
+
   "mclaren-p1": {
-    name:"MCLAREN P1", engine:"3.8L V8 HYBRID", file:"./mclaren-p1.mp3",
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/McLaren_P1.jpg"
+    name: "MCLAREN P1",
+    engine: "3.8L V8 HYBRID",
+    file: "./mclaren-p1.mp3",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/McLaren_P1.jpg"
   },
+
   "lexus-lfa": {
-    name:"LEXUS LFA", engine:"4.8L V10", file:"./lexus-lfa-revving.mp3",
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Lexus_LFA.jpg"
+    name: "LEXUS LFA",
+    engine: "4.8L V10",
+    file: "./lexus-lfa-revving.mp3",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Lexus_LFA.jpg"
   },
+
   "skyline-r34": {
-    name:"NISSAN SKYLINE GT-R R34", engine:"RB26 INLINE-SIX", file:"./nissan-skyline-gt-r-revving.mp3",
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Nissan_Skyline_GT-R_R34.jpg"
+    name: "NISSAN SKYLINE GT-R R34",
+    engine: "RB26 INLINE-SIX",
+    file: "./nissan-skyline-gt-r-revving.mp3",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Nissan_Skyline_GT-R_R34.jpg"
   }
 };
 
@@ -184,11 +243,14 @@ const soundList = document.getElementById("soundList");
 
 function stopAudio() {
   audio.pause();
-  try { audio.currentTime = 0; } catch (_) {}
+  try {
+    audio.currentTime = 0;
+  } catch (_) {}
 }
 
 function chooseCar() {
   stopAudio();
+
   const car = cars[select.value];
   if (!car) return;
 
@@ -221,6 +283,7 @@ function renderCars() {
     img.src = car.image;
     img.alt = car.name;
     img.loading = "lazy";
+
     img.onerror = function() {
       this.onerror = null;
       this.src = "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80";
@@ -234,22 +297,26 @@ function renderCars() {
     name.textContent = car.name;
 
     const details = document.createElement("span");
-    details.textContent = car.engine + " · " + (car.file ? "Audio: " + car.file : "Audio not added yet");
+    details.textContent = car.engine + " · " +
+      (car.file ? "Audio: " + car.file : "Audio not added yet");
 
     info.append(name, details);
     imageBox.appendChild(img);
     card.append(imageBox, info);
+
     card.addEventListener("click", () => {
       select.value = key;
       chooseCar();
-      window.scrollTo({top:0,behavior:"smooth"});
+      window.scrollTo({top: 0, behavior: "smooth"});
     });
+
     card.style.cursor = "pointer";
     soundList.appendChild(card);
   });
 }
 
 select.addEventListener("change", chooseCar);
+
 volume.addEventListener("input", () => {
   audio.volume = Number(volume.value) / 100;
   volumeValue.textContent = volume.value + "%";
@@ -260,13 +327,16 @@ playBtn.addEventListener("click", async () => {
   if (!car || !car.file) return;
 
   audio.volume = Number(volume.value) / 100;
+
   try {
     await audio.play();
     statusText.textContent = "ENGINE RUNNING";
     message.textContent = "Audio playing: " + car.name;
   } catch (error) {
     statusText.textContent = "AUDIO UNAVAILABLE";
-    message.textContent = "Could not play " + car.file + ". Check the exact filename in GitHub.";
+    message.textContent =
+      "Could not play " + car.file +
+      ". The file may be missing or its audio format may not be supported by this browser.";
   }
 });
 
@@ -283,13 +353,17 @@ audio.addEventListener("ended", () => {
 
 audio.addEventListener("error", () => {
   const car = cars[select.value];
+
   if (car && car.file) {
     statusText.textContent = "AUDIO UNAVAILABLE";
-    message.textContent = "Could not load " + car.file + ". Check the exact filename and location.";
+    message.textContent =
+      "Could not load " + car.file +
+      ". Check the exact filename, location and supported audio format.";
   }
 });
 
 audio.volume = 0.7;
+
 renderCars();
 chooseCar();
 </script>
