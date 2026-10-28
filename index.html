@@ -152,16 +152,6 @@ footer strong{color:var(--red)}
 
 const weeklyMachines = [
   {
-  key: "ferrari-f12tdf",
-  name: "Ferrari F12tdf",
-  brand: "FERRARI",
-  power: "780 HP",
-  engine: "6.3L V12",
-  acceleration: "2.9 s",
-  image: "https://commons.wikimedia.org/wiki/Special:FilePath/Ferrari_F12tdf.jpg",
-  description: "A naturally aspirated V12, lightweight engineering and track-focused aerodynamics define this extreme Ferrari."
-},
-  {
     key:"chiron",name:"Bugatti Chiron",brand:"BUGATTI",
     power:"1500 HP",engine:"W16",acceleration:"2.4 s",
     image:"https://commons.wikimedia.org/wiki/Special:FilePath/Bugatti_Chiron_2017.jpg",
@@ -194,7 +184,7 @@ const weeklyMachines = [
   {
     key:"dodge-demon",name:"Dodge Challenger SRT Demon",brand:"DODGE",
     power:"840 HP*",engine:"Supercharged V8",acceleration:"2.3 s*",
-    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Dodge_Challenger_SRT_Demon.jpg",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/2018_Dodge_Challenger_SRT_Demon.jpg",
     description:"A supercharged V8 muscle car engineered for dramatic straight-line performance. Specifications vary by version and conditions."
   },
   {
@@ -214,6 +204,12 @@ const weeklyMachines = [
     power:"276 HP*",engine:"RB26 Inline-Six",acceleration:"5.0 s*",
     image:"https://commons.wikimedia.org/wiki/Special:FilePath/Nissan_Skyline_GT-R_R34.jpg",
     description:"An icon of Japanese performance culture, loved for its legendary RB26 engine and lasting legacy."
+  },
+  {
+    key:"supra-mk4",name:"Toyota Supra MK4",brand:"TOYOTA",
+    power:"276 HP*",engine:"3.0L 2JZ-GTE Turbo Inline-Six",acceleration:"4.6 s*",
+    image:"https://commons.wikimedia.org/wiki/Special:FilePath/Toyota_Supra_mk4.jpg",
+    description:"A Japanese performance legend powered by the twin-turbo 2JZ-GTE, celebrated for its tuning potential and unmistakable character."
   },
   {
     key:"lexus-lfa",name:"Lexus LFA",brand:"LEXUS",
@@ -257,11 +253,7 @@ function showMachineOfTheWeek() {
   image.src = car.image;
 
   const details = document.getElementById("weeklyDetails");
-  if (car.key === "dodge-demon") {
-    details.href = "sounds.html";
-  } else {
-    details.href = "car.html?car="+encodeURIComponent(car.key);
-  }
+  details.href = "car.html?car="+encodeURIComponent(car.key);
   document.getElementById("weeklySound").href = "sounds.html";
 }
 showMachineOfTheWeek();
